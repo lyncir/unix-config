@@ -1,0 +1,11 @@
+# Fvwm config
+
+fvwm: 2.6
+
+
+## software
+
+* fvwm
+* rox-filer
+* mplayer2
+* Xinerama
