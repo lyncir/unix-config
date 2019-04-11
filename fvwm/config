@@ -8,16 +8,13 @@ DefaultFont 		"xft:Sans:Bold:size=8:antialias=True"
 # 桌面数量
 DeskTopSize			3x1
 
-# EdgeScroll
-EdgeScroll          100 100 
-
-# SnapAttraction
-SnapAttraction		10
+# EdgeScroll 多屏建议设置0 0
+EdgeScroll          100 100
 
 # Window Max L,R,T,B
 #EwmhBaseStruts 		0 0 22 42
 
-# Window Move style
+# Window Move style 窗口立即随鼠标移动
 OpaqueMoveSize -1
 
 
@@ -50,27 +47,28 @@ AddToMenu			RootMenu "Fvwm" Title
 # 启动函数
 DestroyFunc			StartFunction
 AddToFunc 			StartFunction
-+ I Module			FvwmPager *
-+ I Module			FvwmAuto 500 Raise Nop
-+ I Module			FvwmAnimate
++ I Module			FvwmPager *  # 微型视图
++ I Module			FvwmAnimate  # 动画
++ I Module			FvwmAuto 500 Raise Nop  # 自动提升聚焦窗口
++ I Module			FvwmBacker  # 设置桌面背景
 + I Module			FvwmButtons IconMenu
 + I Module			FvwmButtons ClockDock
-+ I Exec			exec xset s 10800
-+ I Exec			exec feh --bg-fill $HOME/.fvwm/images/wall_01.jpg
++ I Exec			exec xset s 10800  # 设置屏保时间，取消xset s off
+#+ I Exec			exec feh --bg-fill $HOME/.fvwm/images/wall_01.jpg
 + I Exec 			exec trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true
-+ I Exec			exec fcitx
 + I Exec			exec xcompmgr
-+ I Exec			exec claws-mail
 + I Exec			exec numlockx off
 #+ I Exec			exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
++ I Exec			exec setxkbmap -option "ctrl:swapcaps"
 
 # 退出函数
 DestroyFunc			ExitFunction
 AddToFunc			ExitFunction
 + I Exec            exec killall FvwmPager
-+ I Exec            exec killall FvwmAuto
 + I Exec            exec killall FvwmAnimate
++ I Exec            exec killall FvwmAuto
 + I Exec            exec killall FvwmButtons
++ I Exec            exec killall FvwmBacker
 
 ## fvwm模块
 # 页面
@@ -78,6 +76,17 @@ AddToFunc			ExitFunction
 *FvwmPager:			Geometry -10-10
 *FvwmPager:			Colorset * 23
 *FvwmPager: 		HilightColorset * 6
+
+# 桌面背景
+DestroyModuleConfig FvwmBacker*
+*FvwmBacker: Command (Desk 0) -solid black
+#*FvwmBacker: Command (Desk 0, Page 0 0) Exec feh --bg-fill $HOME/.fvwm/images/wall_01.jpg
+#*FvwmBacker: Command (Desk 0, Page 0 1) -solid midnightblue
+
+# 动画
+*FvwmAnimate:		Delay 25
+*FvwmAnimate:		Effect Random  # 随机动画
+*FvwmAnimate:		Width 3  # 动画线条宽度
 
 # 时钟风格
 Style 				"ClockDock" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip, BorderWidth 0, HandleWidth 0
@@ -229,12 +238,6 @@ AddToFunc                       LeftHalfMix
 DestroyFunc			FullScreen
 AddToFunc			FullScreen
 + "I" Maximize			100 100
-
-
-# 动画
-*FvwmAnimate:		Delay 25
-*FvwmAnimate:		Effect Random
-*FvwmAnimate:		Width 3
 
 
 ####window move/resize####

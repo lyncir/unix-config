@@ -2,3 +2,5 @@ mv +100
 ls
 Module FvwmPager 0 3
 Module FvwmPager 0
+DestroyModuleConfig FvwmBacker*
+*FvwmBacker: Command (Desk 0) -solid black
