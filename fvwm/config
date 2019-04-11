@@ -6,7 +6,7 @@ ImagePath			$HOME/.fvwm/Icons:+:/usr/include/X11/bitmaps
 DefaultFont 		"xft:Sans:Bold:size=8:antialias=True"
 
 # 桌面数量
-DeskTopSize			3x3
+DeskTopSize			3x1
 
 # EdgeScroll
 EdgeScroll          100 100 
@@ -63,7 +63,6 @@ AddToFunc 			StartFunction
 + I Exec			exec claws-mail
 + I Exec			exec numlockx off
 #+ I Exec			exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
-+ I Exec			exec setxkbmap -option "ctrl:swapcaps"
 
 # 退出函数
 DestroyFunc			ExitFunction
@@ -103,13 +102,13 @@ DestroyModuleConfig         IconMenu: *
 *IconMenu:			Geometry +0+300
 *IconMenu:			Columns		2
 *IconMenu:			ActiveColorset 6
-*IconMenu(, Icon rxvt.png, Action 'Exec urxvt &')
+*IconMenu(, Icon rxvt.png, Action 'Exec $[infostore.terminal] &')
 *IconMenu(, Icon firefox_22x22.png, Action 'Exec firefox &')
-*IconMenu(, Icon claws-mail.png, Action 'Exec claws-mail &')
 *IconMenu(, Icon libreoffice-calc.png, Action 'Exec libreoffice &')
-*IconMenu(, Icon virtualbox.png, Action 'Exec virtualbox &')
 *IconMenu(, Icon keepassx.png, Action 'Exec keepassx &')
-*IconMenu(, Icon MySQLWorkbench-22.png, Action 'Exec mysql-workbench &')
+*IconMenu(, Icon DBeaver_24x24.png, Action 'Exec  dbeaver &')
+*IconMenu(, Icon dingtalk_24x24.png, Action 'Exec cd $HOME/Repos/dingtalk; npm start &')
+*IconMenu(, Icon Medis_24x24.png, Action 'Exec cd $HOME/Repos/medis; npm start &')
 
 
 #### 窗口风格 ####
@@ -156,6 +155,7 @@ Style "trayer"			!Title, !Borders, Sticky
 Style "FvwmButtons"		NoTitle,WindowListSkip,Sticky,HandleWidth 0,Layer 1
 Style "Desktop"			NoTitle,WindowListSkip,Sticky,HandleWidth 0,Layer 1
 Style "wmCalClock"		Notitle,WindowListSkip
+Style "dingtalk"		!Title
 
 
 ##widows close,max,mini##
@@ -189,7 +189,7 @@ key 8 A M           GoToPage 1 2
 key 9 A M           GoToPage 2 2
 key t A M			Exec exec urxvt
 key b A M			Exec exec surf file:///home/lyncir/urls.html
-key p A M			Exec exec scrot '%Y-%m-%d-%T-screenshot.png' -e 'mv $f ~/virtualbox/tmp/'
+key p A M			Exec exec scrot '%Y-%m-%d-%T-screenshot.png' -e 'mv $f $HOME/Screenshot/'
 key Escape A M		Close
 key i A M			Iconify
 
