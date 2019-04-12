@@ -1,36 +1,42 @@
-#### 基础 ####
-# 图标路径
-ImagePath			$HOME/.fvwm/Icons:+:/usr/include/X11/bitmaps
+#### environment variables ####
+SetEnv fvwm_home		$[HOME]/.fvwm
+SetEnv fvwm_img         $[fvwm_home]/images
+SetEnv fvwm_icon        $[fvwm_home]/icons
+SetEnv fvwm_icon_size   48
 
-# 默认字体
+#### basic settings ####
+# image path
+ImagePath			$[fvwm_icon]:$[fvwm_icon];.png:+
+
+# default font
 DefaultFont 		"xft:Sans:Bold:size=8:antialias=True"
 
-# 桌面数量
+# deskstop size
 DeskTopSize			3x1
 
-# EdgeScroll 多屏建议设置0 0
+# EdgeScroll multi-monitors set 0 0
 EdgeScroll          100 100
 
 # Window Max L,R,T,B
 #EwmhBaseStruts 		0 0 22 42
 
-# Window Move style 窗口立即随鼠标移动
+# Window Move style
 OpaqueMoveSize -1
 
 
-#### 信息存储 ####
-# 设置终端
+#### info store ####
+# set default terminal
 InfoStoreAdd terminal urxvt
 
 
-#### 根菜单 ####
-# 菜单风格
+#### root menu ####
+# root menu style
 MenuStyle * Font "xft:Sans:Bold:size=8:antialias=True"
 
-# 调用根菜单: 鼠标左键
+# inovke root menu: mouse left click
 Mouse 1	R 	 A Menu RootMenu
 
-# 设置根菜单
+# setting root menu
 DestroyMenu			RootMenu
 AddToMenu			RootMenu "Fvwm" Title
 + "&1.Rxvt%icons/terminal.png%"	     Exec exec $[infostore.terminal]
@@ -43,55 +49,53 @@ AddToMenu			RootMenu "Fvwm" Title
 + "&Quit%icons/quit.png%"	         Quit
 
 
-#### 启动关闭函数 ####
-# 启动函数
+#### startfunc and exitfunc ####
+# start function
 DestroyFunc			StartFunction
 AddToFunc 			StartFunction
-+ I Module			FvwmPager *  # 微型视图
-+ I Module			FvwmAnimate  # 动画
-+ I Module			FvwmAuto 500 Raise Nop  # 自动提升聚焦窗口
-+ I Module			FvwmBacker  # 设置桌面背景
++ I Module			FvwmPager *
++ I Module			FvwmAnimate
++ I Module			FvwmAuto 500 Raise Nop
 + I Module			FvwmButtons IconMenu
 + I Module			FvwmButtons ClockDock
-+ I Exec			exec xset s 10800  # 设置屏保时间，取消xset s off
++ I Module 			FvwmBacker
+#+ I Exec			exec xset s 10800  # 设置屏保时间，取消xset s off
 #+ I Exec			exec feh --bg-fill $HOME/.fvwm/images/wall_01.jpg
 + I Exec 			exec trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true
 + I Exec			exec xcompmgr
-+ I Exec			exec numlockx off
+#+ I Exec			exec numlockx off
 #+ I Exec			exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
 + I Exec			exec setxkbmap -option "ctrl:swapcaps"
 
-# 退出函数
-DestroyFunc			ExitFunction
-AddToFunc			ExitFunction
-+ I Exec            exec killall FvwmPager
-+ I Exec            exec killall FvwmAnimate
-+ I Exec            exec killall FvwmAuto
-+ I Exec            exec killall FvwmButtons
-+ I Exec            exec killall FvwmBacker
+# exit function
+#DestroyFunc			ExitFunction
+#AddToFunc			ExitFunction
+#+ I Exec            exec killall FvwmPager
+#+ I Exec            exec killall FvwmAnimate
+#+ I Exec            exec killall FvwmAuto
+#+ I Exec            exec killall FvwmButtons
+#+ I Exec            exec killall FvwmBacker
 
-## fvwm模块
-# 页面
+## fvwm module
+# fvwm pager
 *FvwmPagerLabel		0 Desktop
 *FvwmPager:			Geometry -10-10
 *FvwmPager:			Colorset * 23
 *FvwmPager: 		HilightColorset * 6
 
-# 桌面背景
-DestroyModuleConfig FvwmBacker*
-*FvwmBacker: Command (Desk 0) -solid black
-#*FvwmBacker: Command (Desk 0, Page 0 0) Exec feh --bg-fill $HOME/.fvwm/images/wall_01.jpg
-#*FvwmBacker: Command (Desk 0, Page 0 1) -solid midnightblue
+# setting background
+*FvwmBacker: Command (Desk 0, Page 0 0) Exec fvwm-root $[fvwm_img]/wall_01.png
+*FvwmBacker: Command (Desk 0, Page 0 1) Exec fvwm-root $[fvwm_img]/wall_02.png
 
-# 动画
+# fvwm animate
 *FvwmAnimate:		Delay 25
-*FvwmAnimate:		Effect Random  # 随机动画
-*FvwmAnimate:		Width 3  # 动画线条宽度
+*FvwmAnimate:		Effect Random
+*FvwmAnimate:		Width 3
 
-# 时钟风格
+# clock style
 Style 				"ClockDock" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip, BorderWidth 0, HandleWidth 0
 
-# 时钟
+# clock
 DestroyModuleConfig ClockDock: *
 *ClockDock: 			ButtonGeometry 64x64+0+0
 *ClockDock: 			Columns 1
@@ -99,11 +103,11 @@ DestroyModuleConfig ClockDock: *
 *ClockDock: 			Frame 0
 *ClockDock: 			(Frame 0 ,Swallow "wmCalClock" 'Exec wmCalClock -24 -b 100') 
 
-## 图标菜单
-# 图标菜单风格
+## icon menu
+# icon menu style
 Style               "IconMenu" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip, BorderWidth 0, HandleWidth 0
 
-# 图标菜单
+# icon menu
 DestroyModuleConfig         IconMenu: *
 *IconMenu:			Colorset 23
 *IconMenu:			Frame 0
@@ -120,8 +124,8 @@ DestroyModuleConfig         IconMenu: *
 *IconMenu(, Icon Medis_24x24.png, Action 'Exec cd $HOME/Repos/medis; npm start &')
 
 
-#### 窗口风格 ####
-# 窗口颜色
+#### window style ####
+# window color set
 Colorset 3 fg #101060, bg #e6e7d7
 Colorset 4 fg Black, bg #a6a797
 Colorset 5 fg White, bg Red
@@ -129,7 +133,7 @@ Colorset 7 fg White, bg Black
 Colorset 6 fg white, bg black, RootTransparent, Tint Black 40
 Colorset 23 RootTransparent buffer, fg rgb:ff/ff/c4, bg average, Tint black 20, bgTint black 20
 
-# 窗口装饰
+# window decor
 DestroyDecor WindowDecor
 AddToDecor   WindowDecor
 + TitleStyle LeftJustified Height 14
@@ -146,7 +150,7 @@ AddToDecor   WindowDecor
 + BorderStyle Simple -- NoInset Flat
 + ButtonStyle All -- UseTitleStyle
 
-# 全局窗口风格
+# global window style
 Style "*" 				UseDecor WindowDecor
 Style "*" 				Font "xft:Sans:Bold:size=8:minspace=False:antialias=True"
 Style "*" 				BorderWidth 0, HandleWidth 2
@@ -159,7 +163,7 @@ Style "*"				FocusFollowsMouse
 Style "*"				TileCascadePlacement
 Style "*"				IconBox 50 1050 1050 +15
 Style "*"				StickyIcon
-# 特殊窗口风格
+# special window style
 Style "trayer"			!Title, !Borders, Sticky
 Style "FvwmButtons"		NoTitle,WindowListSkip,Sticky,HandleWidth 0,Layer 1
 Style "Desktop"			NoTitle,WindowListSkip,Sticky,HandleWidth 0,Layer 1
