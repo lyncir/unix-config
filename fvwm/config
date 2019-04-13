@@ -327,11 +327,11 @@ DestroyModuleConfig FvwmPager: *
 *FvwmPager: Font "xft:Sans:Bold:pixelsize=12:minspace=True:antialias=True"
 *FvwmPager: Balloons All
 *FvwmPager: BalloonFont "xft:Sans:Bold:pixelsize=12:minspace=True:antialias=True"
-*FvwmPager: BallonYOffset +2
+#*FvwmPager: BallonYOffset +2
 *FvwmPager: Window3dBorders
 *FvwmPager: MiniIcons
 *FvwmPager: UseSkipList
-*FvwmPager: Rows 3
+#*FvwmPager: Rows 3
 
 
 #####
