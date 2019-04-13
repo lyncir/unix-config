@@ -17,7 +17,7 @@
 SetEnv fvwm_home		$[HOME]/.fvwm
 SetEnv fvwm_img         $[fvwm_home]/images
 SetEnv fvwm_icon        $[fvwm_home]/icons
-SetEnv fvwm_icon_size   24
+SetEnv fvwm_icon_size   24x24
 
 # set default terminal
 InfoStoreAdd terminal urxvt
@@ -96,27 +96,34 @@ Style "dingtalk"		!Title
 #####
 # Basic Functions
 ###########
-DestroyFunc			Maximize-Func2
-AddToFunc			Maximize-Func2
-+ "C" Maximize			100 100
+DestroyFunc			Maximize
+AddToFunc			Maximize
++ "C" 				Maximize 100 100
 
 DestroyFunc			TopHalfMix
 AddToFunc			TopHalfMix
-+ "I" Maximize			100 50
++ "I"				Maximize 100 50
 
 DestroyFunc         LeftHalfMix
 AddToFunc           LeftHalfMix
-+ "I" Maximize      50 100
++ "I"				Maximize 50 100
 
 DestroyFunc			FullScreen
 AddToFunc			FullScreen
-+ "I" Maximize			100 100
++ "I"				Maximize 100 100
 
-DestroyFunc 		drag-n-move
-AddToFunc 			drag-n-move M move
+DestroyFunc 		DragMove
+AddToFunc 			DragMove M move
 
-DestroyFunc 		drag-n-resize
-AddToFunc 			drag-n-resize M resize
+DestroyFunc 		DragResize
+AddToFunc 			DragResize M resize
+
+DestroyFunc 		WindowListFunc
+AddToFunc 			WindowListFunc
++ "I"                 Iconify off
++ "I"                 FlipFocus
++ "I"                 Raise
++ "I"                 WarpToWindow 50 50
 
 
 #####
@@ -141,7 +148,7 @@ AddToFunc 			StartFunction
 + I Exec			exec xcompmgr
 + I Exec			exec numlockx off
 #+ I Exec			exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
-#+ I Exec			exec setxkbmap -option "ctrl:swapcaps"
++ I Exec			exec setxkbmap -option "ctrl:swapcaps"
 
 
 #####
@@ -151,15 +158,14 @@ AddToFunc 			StartFunction
 # widows close,max,mini##
 Mouse 1 1	A		Close
 Mouse 1 4	A		Iconify
-Mouse 1 2 	A		Maximize-Func2
+Mouse 1 2 	A		Maximize
 # inovke root menu: mouse left click
 Mouse 1	R   A       Menu RootMenu
-Mouse 1 W   HM      drag-n-move
-Mouse 3 W   HM      drag-n-resize 
+Mouse 1 W   HM      DragMove
+Mouse 3 W   HM      DragResize 
 
 # Alt+Tab windowlist
-Key Tab A M WindowList Root c c CurrentAtEnd, IconifiedAtEnd
-#Key Tab A M WindowList Root c c NoDeskSort, SelectOnRelease Meta_L
+Key Tab A M WindowList Root c c NoDeskSort, SelectOnRelease Meta_L
 
 # shutkey
 Key z W	CM			Move 0p 20p
@@ -362,13 +368,14 @@ DestroyModuleConfig         IconMenu: *
 *IconMenu:			Geometry +0+300
 *IconMenu:			Columns		2
 *IconMenu:			ActiveColorset 6
-*IconMenu(, Icon rxvt.png, Action 'Exec $[infostore.terminal] &')
-*IconMenu(, Icon firefox_22x22.png, Action 'Exec firefox &')
-*IconMenu(, Icon libreoffice-calc.png, Action 'Exec libreoffice &')
-*IconMenu(, Icon keepassx.png, Action 'Exec keepassx &')
-*IconMenu(, Icon DBeaver_24x24.png, Action 'Exec  dbeaver &')
-*IconMenu(, Icon dingtalk_24x24.png, Action 'Exec cd $HOME/Repos/dingtalk; npm start &')
-*IconMenu(, Icon Medis_24x24.png, Action 'Exec cd $HOME/Repos/medis; npm start &')
+
+*IconMenu(, Icon        rxvt_$[fvwm_icon_size].png, Action 'Exec $[infostore.terminal] &')
+*IconMenu(, Icon     firefox_$[fvwm_icon_size].png, Action 'Exec firefox &')
+*IconMenu(, Icon libreoffice_$[fvwm_icon_size].png, Action 'Exec libreoffice &')
+*IconMenu(, Icon    keepassx_$[fvwm_icon_size].png, Action 'Exec keepassx &')
+*IconMenu(, Icon     dbeaver_$[fvwm_icon_size].png, Action 'Exec dbeaver &')
+*IconMenu(, Icon    dingtalk_$[fvwm_icon_size].png, Action 'Exec cd $HOME/Repos/dingtalk; npm start &')
+*IconMenu(, Icon       medis_$[fvwm_icon_size].png, Action 'Exec cd $HOME/Repos/medis; npm start &')
 
 
 # exit function
