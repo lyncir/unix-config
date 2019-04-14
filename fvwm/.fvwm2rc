@@ -33,7 +33,17 @@ ImagePath			$[fvwm_icon]:$[fvwm_icon];.png:+
 # Virtual Desktops
 ###########
 # deskstop size
+# -------------------
+# |     |     |     |
+# | 0 0 | 1 0 | 2 0 |
+# |     |     |     |
+# |-----------------|
+# |     |     |     |
+# | 0 1 | 1 1 | 2 1 |
+# |     |     |     |
+# -------------------
 DeskTopSize			3x1
+
 
 # EdgeScroll multi-monitors set 0 0
 EdgeScroll          0 0
@@ -125,6 +135,23 @@ AddToFunc 			WindowListFunc
 + "I"                 Raise
 + "I"                 WarpToWindow 50 50
 
+# Volume Control
+DestroyMenu Volume
+AddtoMenu Volume  "<Volume>" Title
+
+"" Nop
++ " MUTE"    Exec amixer -q sset Master toggle
++ " 10"   Exec amixer sset 'Master' 13
++ " 20"   Exec amixer sset 'Master' 32
++ " 30"   Exec amixer sset 'Master' 43
++ " 40"   Exec amixer sset 'Master' 50
++ " 50"   Exec amixer sset 'Master' 56
++ " 60"   Exec amixer sset 'Master' 61
++ " 70"   Exec amixer sset 'Master' 65
++ " 80"   Exec amixer sset 'Master' 68
++ " 90"   Exec amixer sset 'Master' 71
++ "100"   Exec amixer sset 'Master' 74
+
 
 #####
 # Program Launching Functions
@@ -136,14 +163,14 @@ AddToFunc 			WindowListFunc
 ###########
 DestroyFunc			StartFunction
 AddToFunc 			StartFunction
++ I Module 			FvwmBacker
 + I Module			FvwmPager *
 + I Module			FvwmAnimate
 + I Module			FvwmAuto 500 Raise Nop
 + I Module			FvwmButtons IconMenu
 + I Module			FvwmButtons ClockDock
-+ I Module 			FvwmBacker
 #+ I Exec			exec xset s 10800  # 设置屏保时间，取消xset s off
-+ I Exec			exec feh --bg-fill $[fvwm_img]/wall_02.png
+#+ I Exec			exec feh --bg-fill $[fvwm_img]/wall_02.png
 + I Exec 			exec trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true
 + I Exec			exec xcompmgr
 + I Exec			exec numlockx off
@@ -160,12 +187,8 @@ Mouse 1 1	A		Close
 Mouse 1 4	A		Iconify
 Mouse 1 2 	A		Maximize
 # inovke root menu: mouse left click
-Mouse 1	R   A       Menu RootMenu
 Mouse 1 W   HM      DragMove
 Mouse 3 W   HM      DragResize 
-
-# Alt+Tab windowlist
-Key Tab A M WindowList Root c c NoDeskSort, SelectOnRelease Meta_L
 
 # shutkey
 Key z W	CM			Move 0p 20p
@@ -178,12 +201,6 @@ key f W CM			FullScreen
 key 1 A M			GoToPage 0 0
 key 2 A M			GoToPage 1 0
 key 3 A M           GoToPage 2 0
-key 4 A M           GoToPage 0 1
-key 5 A M           GoToPage 1 1
-key 6 A M           GoToPage 2 1
-key 7 A M           GoToPage 0 2
-key 8 A M           GoToPage 1 2
-key 9 A M           GoToPage 2 2
 key t A M			Exec exec urxvt
 key p A M			Exec exec scrot '%Y-%m-%d-%T-screenshot.png' -e 'mv $f $HOME/Screenshot/'
 key Escape A M		Close
@@ -192,12 +209,6 @@ key i A M			Iconify
 key 1 W SCM	PointerWindow	MoveToPage 0 0
 key 2 W SCM	PointerWindow	MoveToPage 1 0
 key 3 W SCM	PointerWindow	MoveToPage 2 0
-key 4 W SCM	PointerWindow	MoveToPage 0 1
-key 5 W SCM	PointerWindow	MoveToPage 1 1
-key 6 W SCM	PointerWindow	MoveToPage 2 1
-key 7 W SCM	PointerWindow	MoveToPage 0 2
-key 8 W SCM	PointerWindow	MoveToPage 1 2
-key 9 W SCM	PointerWindow	MoveToPage 2 2
 
 # Fn key
 key XF86Explorer			A	N	Exec exec rox
@@ -298,9 +309,10 @@ MenuStyle * Font "Shadow=2:xft:Sans:Bold:size=11:antialias=True"
 #####
 # FvwmRootMenu
 ###########
-DestroyMenu			RootMenu
-AddToMenu			RootMenu "Fvwm" Title
+DestroyMenu			MenuFvwmRoot	
+AddToMenu			MenuFvwmRoot "Fvwm" Title
 + "&1.Rxvt%icons/terminal.png%"	     Exec exec $[infostore.terminal]
++ "Volume"        					 Popup   Volume
 + ""				                 Nop
 + "Fvwm&Console%icons/terminal.png%" Module FvwmConsole -terminal $[infostore.terminal]
 + "&Lock"	                         Exec exec slock
@@ -395,8 +407,9 @@ DestroyModuleConfig         IconMenu: *
 #*FvwmPager: 		HilightColorset * 6
 
 # setting background
-#*FvwmBacker: Command (Desk 0, Page 0 0) Exec fvwm-root $[fvwm_img]/wall_01.png
-#*FvwmBacker: Command (Desk 0, Page 0 1) Exec fvwm-root $[fvwm_img]/wall_02.png
+*FvwmBacker: Command(Desk 0, Page 0 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
+*FvwmBacker: Command(Desk 0, Page 1 0) Exec feh --bg-fill $[fvwm_img]/wall_02.png
+*FvwmBacker: Command(Desk 0, Page 2 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
 
 # fvwm animate
 #*FvwmAnimate:		Delay 25
