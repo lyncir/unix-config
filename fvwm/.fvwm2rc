@@ -170,12 +170,11 @@ AddToFunc 			StartFunction
 + I Module			FvwmButtons IconMenu
 + I Module			FvwmButtons ClockDock
 #+ I Exec			exec xset s 10800  # 设置屏保时间，取消xset s off
-#+ I Exec			exec feh --bg-fill $[fvwm_img]/wall_02.png
 + I Exec 			exec trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true
 + I Exec			exec xcompmgr
 + I Exec			exec numlockx off
 #+ I Exec			exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
-+ I Exec			exec setxkbmap -option "ctrl:swapcaps"
+#+ I Exec			exec setxkbmap -option "ctrl:swapcaps"
 
 
 #####
@@ -355,6 +354,7 @@ DestroyModuleConfig FvwmPager: *
 #####
 # ClockButtons
 ###########
+# TZ=":Etc/GMT-9" wmcalclock
 # clock style
 Style 				"ClockDock" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip, BorderWidth 0, HandleWidth 0
 
