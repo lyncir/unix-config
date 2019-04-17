@@ -1,0 +1,417 @@
+###########
+#  ____________________________
+# (   _________________________)
+#  ) (__  _  _  _    _  
+# (   __)( \/ )( \/\/ )/\/\
+#  ) (    \  /  \    //    \
+# (___)    \/    \/\/(_/\/\_) 2.6.7
+#
+# My personal fvwm2rc file
+#
+#######################
+
+
+#####
+# Set Environment variables
+###########
+SetEnv fvwm_home		$[HOME]/.fvwm
+SetEnv fvwm_img         $[fvwm_home]/images
+SetEnv fvwm_icon        $[fvwm_home]/icons
+SetEnv fvwm_icon_size   24x24
+
+# set default terminal
+InfoStoreAdd terminal urxvt
+
+
+#####
+# Set the image path
+###########
+ImagePath			$[fvwm_icon]:$[fvwm_icon];.png:+
+
+
+#####
+# Virtual Desktops
+###########
+# deskstop size
+# -------------------
+# |     |     |     |
+# | 0 0 | 1 0 | 2 0 |
+# |     |     |     |
+# |-----------------|
+# |     |     |     |
+# | 0 1 | 1 1 | 2 1 |
+# |     |     |     |
+# -------------------
+DeskTopSize			3x1
+
+
+# EdgeScroll multi-monitors set 0 0
+EdgeScroll          0 0
+
+
+#####
+# Mouse and Focus Behavior
+###########
+Style "*"				FocusFollowsMouse
+
+# Window Max L,R,T,B
+#EwmhBaseStruts 		0 0 22 42
+
+
+#####
+# Global Styles and options
+###########
+Style *                 TileCascadePlacement, GrabFocusOff
+Style *                 NoPPosition, ResizeOpaque
+Style *                 DecorateTransient, DontRaiseTransient
+Style *                 DontLowerTransient, StackTransientParent
+Style *                 GrabFocusTransientOff
+Style *                 WindowShadeSteps 20, WindowShadeScrolls
+Style *                 MwmDecor, SlipperyIcon
+Style *					IconBox 50 1050 1050 +15
+Style *					StickyIcon
+
+
+## options
+# Window Move style
+OpaqueMoveSize -1
+
+# snap attraction
+SnapAttraction	10 SameType Screen
+
+
+#####
+# Program Styles
+###########
+# use xwininfo lookup
+Style "trayer"			!Title, !Borders, Sticky
+Style "FvwmButtons"		NoTitle,WindowListSkip,Sticky,HandleWidth 0,Layer 1
+Style "Desktop"			NoTitle,WindowListSkip,Sticky,HandleWidth 0,Layer 1
+Style "wmCalClock"		Notitle,WindowListSkip
+Style "dingtalk"		!Title
+
+
+#####
+#
+# DestroyFunc FuncName
+# AddToFunc   FuncName
+# + I (Action to happen immediately)
+# + C (Action to happen on a mouse 'click)
+# + D (Action to happen on a mouse 'double click')
+# + H (Action to happen on a mouse 'hold')
+# + M (Action to happen on a mouse 'motion')
+#
+###########
+
+#####
+# Basic Functions
+###########
+DestroyFunc			Maximize
+AddToFunc			Maximize
++ "C" 				Maximize 100 100
+
+DestroyFunc			TopHalfMix
+AddToFunc			TopHalfMix
++ "I"				Maximize 100 50
+
+DestroyFunc         LeftHalfMix
+AddToFunc           LeftHalfMix
++ "I"				Maximize 50 100
+
+DestroyFunc			FullScreen
+AddToFunc			FullScreen
++ "I"				Maximize 100 100
+
+DestroyFunc 		DragMove
+AddToFunc 			DragMove M move
+
+DestroyFunc 		DragResize
+AddToFunc 			DragResize M resize
+
+DestroyFunc 		WindowListFunc
+AddToFunc 			WindowListFunc
++ "I"                 Iconify off
++ "I"                 FlipFocus
++ "I"                 Raise
++ "I"                 WarpToWindow 50 50
+
+# Volume Control
+DestroyMenu Volume
+AddtoMenu Volume  "<Volume>" Title
+
+"" Nop
++ " MUTE"      Exec amixer -q sset Master toggle
++ " 10%%"      Exec amixer -q sset 'Master' 10%
++ " 20%%"      Exec amixer -q sset 'Master' 20%
++ " 30%%"      Exec amixer -q sset 'Master' 30%
++ " 40%%"      Exec amixer -q sset 'Master' 40%
++ " 50%%"      Exec amixer -q sset 'Master' 50%
++ " 60%%"      Exec amixer -q sset 'Master' 60%
++ " 70%%"      Exec amixer -q sset 'Master' 70%
++ " 80%%"      Exec amixer -q sset 'Master' 80%
++ " 90%%"      Exec amixer -q sset 'Master' 90%
++ "100%%"      Exec amixer -q sset 'Master' 100%
+
+
+#####
+# Program Launching Functions
+###########
+
+
+#####
+# Startup Functions
+###########
+DestroyFunc			StartFunction
+AddToFunc 			StartFunction
++ I Module 			FvwmBacker
++ I Module			FvwmPager *
++ I Module			FvwmAnimate
++ I Module			FvwmAuto 500 Raise Nop
++ I Module			FvwmButtons IconMenu
++ I Module			FvwmButtons ClockDock
+#+ I Exec			exec xset s 10800  # 设置屏保时间，取消xset s off
++ I Exec 			exec trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true
++ I Exec			exec xcompmgr
++ I Exec			exec numlockx off
+#+ I Exec			exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
+#+ I Exec			exec setxkbmap -option "ctrl:swapcaps"
+
+
+#####
+# Basic Bindings
+###########
+
+# widows close,max,mini##
+Mouse 1 1	A		Close
+Mouse 1 4	A		Iconify
+Mouse 1 2 	A		Maximize
+# inovke root menu: mouse left click
+Mouse 1 W   HM      DragMove
+Mouse 3 W   HM      DragResize 
+
+# shutkey
+Key z W	CM			Move 0p 20p
+Key r A	CM			Restart
+Key l A CM			Exec exec slock
+key h W CM			TopHalfMix
+key v W CM			LeftHalfMix
+key f W CM			FullScreen
+
+key 1 A M			GoToPage 0 0
+key 2 A M			GoToPage 1 0
+key 3 A M           GoToPage 2 0
+key t A M			Exec exec urxvt
+key p A M			Exec exec scrot '%Y-%m-%d-%T-screenshot.png' -e 'mv $f $HOME/Screenshot/'
+key Escape A M		Close
+key i A M			Iconify
+
+key 1 W SCM	PointerWindow	MoveToPage 0 0
+key 2 W SCM	PointerWindow	MoveToPage 1 0
+key 3 W SCM	PointerWindow	MoveToPage 2 0
+
+# Fn key
+key XF86Explorer			A	N	Exec exec rox
+key XF86HomePage			A   N   Exec exec firefox
+key XF86Calculator			A   N   Exec exec urxvt -e ipython
+key XF86Tools				A   N   Exec exec urxvt -e ncmpcpp
+key XF86AudioPrev			A   N   Exec exec ncmpcpp prev
+key XF86AudioNext			A   N   Exec exec ncmpcpp next
+key XF86AudioPlay			A   N   Exec exec ncmpcpp toggle
+key XF86AudioStop			A   N   Exec exec ncmpcpp stop
+key XF86AudioMute			A   N   Exec exec amixer -q sset Master toggle
+key	XF86AudioLowerVolume	A	N	Exec exec amixer -q sset Master 1- unmute
+key XF86AudioRaiseVolume	A	N	Exec exec amixer -q sset Master 1+ unmute
+
+
+#####
+# Window Colorsets
+###########
+# window color set
+# http://fvwm-themes.sourceforge.net/doc/colorsets
+# 0 = Default colors
+# 1 = Inactive windows
+# 2 = Active windows
+# 3 = Inactive menu entry and menu background
+# 4 = Active menu entry
+# 5 = greyed out menu entry (only bg used)
+# 6 = module foreground and background
+# 7 = hilight colors
+Colorset 5 fg White,   bg Red
+Colorset 3 fg Black,   bg #f1ccb8
+Colorset 4 fg Black,   bg #e7dac9
+
+
+#####
+# Window Decor
+###########
+DestroyDecor WindowDecor
+AddToDecor   WindowDecor
++ TitleStyle LeftJustified Height 14
++ ButtonStyle 1 ActiveUp   Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
++ ButtonStyle 1 ActiveDown Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
++ ButtonStyle 1 Inactive   Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
+
++ ButtonStyle 4 ActiveUp   Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
++ ButtonStyle 4 ActiveDown Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
++ ButtonStyle 4 Inactive   Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
+
++ ButtonStyle 2 ActiveUp   Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
++ ButtonStyle 2 ActiveDown Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
++ ButtonStyle 2 Inactive   Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
++ TitleStyle -- Flat
++ BorderStyle Simple -- NoInset Flat
++ ButtonStyle All -- UseTitleStyle
+
+
+#####
+# Window Styles
+###########
+Style "*" 				UseDecor WindowDecor
+Style "*" 				Font "xft:Sans:Bold:size=8:minspace=False:antialias=True"
+Style "*" 				BorderWidth 0, HandleWidth 2
+Style "*" 				MWMBorder, FirmBorder
+Style "*" 				Colorset 4
+Style "*" 				HilightColorset 3
+Style "*" 				BorderColorset 5
+Style "*" 				HilightBorderColorset 5
+
+#####
+# Menu Colorsets
+###########
+#Colorset 3 fg #101060, bg #e6e7d7
+#Colorset 4 fg Black,   bg #a6a797
+#Colorset 5 fg White,   bg #f55066
+#Colorset 6 fg white,   bg black, RootTransparent, Tint Black 40
+#Colorset 7 fg White,   bg Black
+#Colorset 23 RootTransparent buffer, fg rgb:ff/ff/c4, bg average, Tint black 20, bgTint black 20
+Colorset 7 RootTransparent, fg Black, bg average, sh Black, hi #202070, Tint White 60, bgTint White 60
+Colorset 8 fg DarkRed, bg #e6e7d7, sh Black, hi #202070
+
+
+#####
+# MenuStyles
+###########
+MenuStyle * PopupDelayed, PopupDelay 300, PopdownImmediately
+MenuStyle * PopupOffset -5 100, TitleWarpOff
+MenuStyle * TitleUnderlines2, SeparatorsLong, TrianglesSolid
+MenuStyle * AnimationOff, AutomaticHotkeysOff
+MenuStyle * BorderWidth 2
+MenuStyle * PopupAsSubmenu, HoldSubmenus, SubmenusRight
+MenuStyle * ItemFormat "%|%5.5i%1.3l%2.3>%|"
+MenuStyle * VerticalItemSpacing 1 1, VerticalTitleSpacing 2 2
+MenuStyle * MenuColorset 7
+MenuStyle * ActiveFore, Hilight3DOff
+MenuStyle * ActiveColorset 8
+MenuStyle * Font "Shadow=2:xft:Sans:Bold:size=11:antialias=True"
+
+
+#####
+# FvwmRootMenu
+###########
+DestroyMenu			MenuFvwmRoot	
+AddToMenu			MenuFvwmRoot "Fvwm" Title
++ "&1.Rxvt%icons/terminal.png%"	     Exec exec $[infostore.terminal]
++ "Volume"        					 Popup   Volume
++ ""				                 Nop
++ "Fvwm&Console%icons/terminal.png%" Module FvwmConsole -terminal $[infostore.terminal]
++ "&Lock"	                         Exec exec slock
++ ""				                 Nop
++ "Re&fresh%icons/refresh.png%"      Refresh
++ "&Restart%icons/restart.png%"      Restart
++ "&Quit%icons/quit.png%"	         Quit
+
+
+#####
+# Module Colorsets
+###########
+Colorset 9 fg rgb:00/00/00, hi rgb:00/00/00, sh rgb:00/00/00, bg rgb:e9/e9/d9
+Colorset 10 fg rgb:00/00/00, hi rgb:dd/00/00, sh rgb:dd/00/00, bg rgb:fb/fc/ec
+Colorset 23 RootTransparent buffer, fg rgb:ff/ff/c4, bg average, Tint black 20, bgTint black 20
+
+
+#####
+# FvwmPager
+###########
+Style "FvwmPager" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
+
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Geometry -10-10
+*FvwmPager: Colorset * 23
+*FvwmPager: HilightColorset * 10
+*FvwmPager: BalloonColorset * 9
+*FvwmPager: WindowColorsets 9 10
+*FvwmPager: Font "xft:Sans:Bold:pixelsize=12:minspace=True:antialias=True"
+*FvwmPager: Balloons All
+*FvwmPager: BalloonFont "xft:Sans:Bold:pixelsize=12:minspace=True:antialias=True"
+#*FvwmPager: BallonYOffset +2
+*FvwmPager: Window3dBorders
+*FvwmPager: MiniIcons
+*FvwmPager: UseSkipList
+#*FvwmPager: Rows 3
+
+
+#####
+# ClockButtons
+###########
+# TZ=":Etc/GMT-9" wmcalclock
+# clock style
+Style 				"ClockDock" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip, BorderWidth 0, HandleWidth 0
+
+# clock
+DestroyModuleConfig ClockDock: *
+*ClockDock: 			ButtonGeometry 64x64+0+0
+*ClockDock: 			Columns 1
+*ClockDock: 			Colorset 23
+*ClockDock: 			Frame 0
+*ClockDock: 			(Frame 0 ,Swallow "wmCalClock" 'Exec wmCalClock -24 -b 100') 
+
+#####
+# IconMenuButtons
+###########
+# icon menu style
+Style               "IconMenu" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip, BorderWidth 0, HandleWidth 0
+
+# icon menu
+DestroyModuleConfig         IconMenu: *
+*IconMenu:			Colorset 23
+*IconMenu:			Frame 0
+*IconMenu:			Font	5x8
+*IconMenu:			Geometry +0+300
+*IconMenu:			Columns		2
+*IconMenu:			ActiveColorset 6
+
+*IconMenu(, Icon        rxvt_$[fvwm_icon_size].png, Action 'Exec $[infostore.terminal] &')
+*IconMenu(, Icon     firefox_$[fvwm_icon_size].png, Action 'Exec firefox &')
+*IconMenu(, Icon libreoffice_$[fvwm_icon_size].png, Action 'Exec libreoffice &')
+*IconMenu(, Icon    keepassx_$[fvwm_icon_size].png, Action 'Exec keepassx &')
+*IconMenu(, Icon     dbeaver_$[fvwm_icon_size].png, Action 'Exec dbeaver &')
+*IconMenu(, Icon    dingtalk_$[fvwm_icon_size].png, Action 'Exec cd $HOME/Repos/dingtalk; npm start &')
+*IconMenu(, Icon       medis_$[fvwm_icon_size].png, Action 'Exec cd $HOME/Repos/medis; npm start &')
+
+
+# exit function
+#DestroyFunc			ExitFunction
+#AddToFunc			ExitFunction
+#+ I Exec            exec killall FvwmPager
+#+ I Exec            exec killall FvwmAnimate
+#+ I Exec            exec killall FvwmAuto
+#+ I Exec            exec killall FvwmButtons
+#+ I Exec            exec killall FvwmBacker
+
+## fvwm module
+# fvwm pager
+#*FvwmPagerLabel		0 Desktop
+#*FvwmPager:			Geometry -10-10
+#*FvwmPager:			Colorset * 23
+#*FvwmPager: 		HilightColorset * 6
+
+# setting background
+*FvwmBacker: Command(Desk 0, Page 0 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
+*FvwmBacker: Command(Desk 0, Page 1 0) Exec feh --bg-fill $[fvwm_img]/wall_02.png
+*FvwmBacker: Command(Desk 0, Page 2 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
+
+# fvwm animate
+#*FvwmAnimate:		Delay 25
+#*FvwmAnimate:		Effect Random
+#*FvwmAnimate:		Width 3
