@@ -1,0 +1,36 @@
+! Xft settings ----------------------------
+Xft.dpi:96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+!------------------------------------------
+
+!
+! URXVT - Settings
+!
+
+!!$HOME/.Xdefaults
+URxvt.preeditType:Root
+
+!!滚动条设置
+URxvt.scrollBar:False
+
+!!光标闪烁
+URxvt.cursorBlink:True
+
+! 真透明
+! 设置前景色
+URxvt.foreground: grey80
+!URxvt*foreground : #00FF00
+! 设置背景色
+URxvt.background: rgba:0000/0000/0000/dddd
+!URxvt*background : #000000
+! 设置游标颜色
+!URxvt*cursorColor: #FF0000
+! 设置颜色深度
+URxvt.depth: 32
+
+!!字体设置
+URxvt.font:xft:DejaVu Sans Mono:size=8:style=Book:antialias=true,xft:Microsoft YaHei Mono:size=8:style=Regular:antialias=true
+URxvt.boldfont:xft:DejaVu Sans Mono:size=8:style=Bold:antialias=true,xft:Microsoft YaHei Mono:size=8:style=Bold:antialias=true

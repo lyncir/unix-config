@@ -1,0 +1,13 @@
+urxvt config
+
+
+## use fonts
+
+* DejaVu Sans Mono
+* Microsoft YaHei Mono
+
+
+## install
+
+    cp Microsoft-YaHei-Mono.ttf /usr/local/share/fonts/
+	fc-cache
