@@ -16,5 +16,6 @@ linux 通用配置
 * slock
 * rox
 * scrot 
+* flameshot
 * dbever
 * medis
