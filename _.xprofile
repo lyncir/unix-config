@@ -1,0 +1,2 @@
+xcompmgr &
+trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true &

@@ -19,3 +19,18 @@ linux 通用配置
 * flameshot
 * dbever
 * medis
+
+
+## fonts
+
+
+### use fonts
+
+* DejaVu Sans Mono
+* Microsoft YaHei Mono
+
+
+### install
+
+    cp fonts/Microsoft-YaHei-Mono.ttf /usr/local/share/fonts/
+	fc-cache

@@ -170,8 +170,8 @@ AddToFunc 			StartFunction
 + I Module			FvwmButtons IconMenu
 + I Module			FvwmButtons ClockDock
 #+ I Exec			exec xset s 10800  # 设置屏保时间，取消xset s off
-+ I Exec 			exec trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true
-+ I Exec			exec xcompmgr
+#+ I Exec 			exec trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true
+#+ I Exec			exec xcompmgr
 + I Exec			exec numlockx off
 #+ I Exec			exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
 #+ I Exec			exec setxkbmap -option "ctrl:swapcaps"
@@ -408,7 +408,7 @@ DestroyModuleConfig         IconMenu: *
 
 # setting background
 *FvwmBacker: Command(Desk 0, Page 0 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
-*FvwmBacker: Command(Desk 0, Page 1 0) Exec feh --bg-fill $[fvwm_img]/wall_02.png
+*FvwmBacker: Command(Desk 0, Page 1 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
 *FvwmBacker: Command(Desk 0, Page 2 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
 
 # fvwm animate
