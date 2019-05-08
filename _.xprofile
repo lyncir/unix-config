@@ -1,3 +1,5 @@
 xcompmgr &
 trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true &
 redshift -t 5800:4600 -l 24.46:118.1 -g 0.9:1:1 &
+flameshot &
+xpad -h &

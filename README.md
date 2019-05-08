@@ -4,21 +4,24 @@ linux 通用配置
 
 ## 软件依赖
 
-* feh: a fast and light image viewer
-* fcitx: A Flexible Input Method Framework
-* fvwm: multiple virtual desktop window manager for the X Window system
-* vim: a editor
+* feh
+* fcitx
+* fvwm
+* vim
 * trayer
-* urxvt
+* rxvt-unicode
 * ncmpcpp
 * xcompmgr
 * wmCalClock
 * slock
-* rox
-* scrot 
+* rox-filer
 * flameshot
 * dbever
 * medis
+* xpad
+* keepassx
+* firefox-esr
+* libreoffice
 
 
 ## fonts
