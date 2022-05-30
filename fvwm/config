@@ -128,16 +128,16 @@ Style *                 DecorateTransient
 # TODO: 瞬时窗口,始终最上层
 
 # TODO: 未知的
-Style *					DontRaiseTransient
-Style *					DontLowerTransient
-Style *					StackTransientParent
-Style *					GrabFocusTransientOff
-Style *					WindowShadeSteps 20
-Style *					WindowShadeScrolls
-Style *					MwmDecor
-Style *					SlipperyIcon
-Style *					IconBox 50 1050 1050 +15
-Style *					StickyIcon
+#Style *					DontRaiseTransient
+#Style *					DontLowerTransient
+#Style *					StackTransientParent
+#Style *					GrabFocusTransientOff
+Style *						MwmDecor
+Style *						WindowShadeScrolls
+Style *						WindowShadeSteps 20
+#Style *					SlipperyIcon
+#Style *					IconBox 50 1050 1050 +15
+#Style *					StickyIcon
 
 
 #####
