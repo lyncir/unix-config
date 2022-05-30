@@ -34,3 +34,55 @@ URxvt.depth: 32
 !!字体设置
 URxvt.font:xft:DejaVu Sans Mono:size=8:style=Book:antialias=true,xft:Microsoft YaHei Mono:size=8:style=Regular:antialias=true
 URxvt.boldfont:xft:DejaVu Sans Mono:size=8:style=Bold:antialias=true,xft:Microsoft YaHei Mono:size=8:style=Bold:antialias=true
+
+
+xosview*title: volticor
+xosview*captions: False
+xosview*labels: False
+xosview*usedlabels: False
+xosview*borderwidth: 0
+xosview*font: fixed
+xosview*foreground: black
+xosview*background: #003c3c
+xosview*cpuGraph: True
+xosview*memGraph: False
+xosview*netBandwidth: 150000
+xosview*netDecay: False
+xosview*netGraph: True
+xosview*diskGraph: True
+xosview*diskDecay: False
+xosview*diskUsedFormat: percent
+
+xosview*battery: False
+xosview*gfx: False
+xosview*net: False
+xosview*page: False
+xosview*disk: False
+xosview*interrupts: False
+xosview*load: False
+xosview*swap: False
+xosview*lmstemp: False
+xosview*cpu: False
+xosview*mem: False
+xosview*wireless: False
+
+xosview*cpuFreeColor: #2d2d2d
+xosview*cpuUserColor: #900000
+xosview*cpuFormat: all
+xosview*memFreeColor: #2d2d2d
+xosview*memUsedColor: #900000
+xosview*memCacheColor: #006000
+xosview*diskIdleColor: #2d2d2d
+xosview*diskWriteColor: #900000
+xosview*diskReadColor: #000090
+xosview*netBackground: #2d2d2d
+xosview*netInColor: #000090
+xosview*netOutColor: #900000
+xosview*batteryLeftColor: #900000
+xosview*batteryUsedColor: #2d2d2d
+xosview*batteryChargeColor: #006000
+xosview*batteryFullColor: #009000
+xosview*batteryLowColor: #a00000
+xosview*batteryCritColor: #f00000
+xosview*batteryNoneColor: #2d2d2d
+xosview*batteryPriority: 30

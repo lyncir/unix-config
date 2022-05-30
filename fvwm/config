@@ -1,4 +1,4 @@
-###########
+#####################
 #  ____________________________
 # (   _________________________)
 #  ) (__  _  _  _    _  
@@ -8,30 +8,40 @@
 #
 # My personal fvwm2rc file
 #
-#######################
+#########################################
+
+############################################################################
+# 全局配置
+############################################################################
+
+######
+# 设置环境变量
+###############
+# 主目录
+SetEnv fvwm_home			$[HOME]/.fvwm
+# 桌面背景图片
+SetEnv fvwm_img         	$[fvwm_home]/images
+# 程序图标icon
+SetEnv fvwm_icon        	$[fvwm_home]/icons
+# 程序图标大小
+SetEnv fvwm_icon_size   	24x24
+# 脚本
+SetEnv fvwm_scripts   		$[fvwm_home]/scripts
+
+# 设置默认终端存储到InfoStore, 引用方式: $[infostore.terminal]
+InfoStoreAdd terminal 		urxvt
 
 
-#####
-# Set Environment variables
-###########
-SetEnv fvwm_home		$[HOME]/.fvwm
-SetEnv fvwm_img         $[fvwm_home]/images
-SetEnv fvwm_icon        $[fvwm_home]/icons
-SetEnv fvwm_icon_size   24x24
-
-# set default terminal
-InfoStoreAdd terminal urxvt
+######
+# 设置图标路径
+##############
+# Icon指定图标时自动搜索的路径
+ImagePath					$[fvwm_icon]:$[fvwm_icon];.png:$[fvwm_img]:+
 
 
-#####
-# Set the image path
-###########
-ImagePath			$[fvwm_icon]:$[fvwm_icon];.png:+
-
-
-#####
-# Virtual Desktops
-###########
+########
+# 虚拟桌面
+##########
 # deskstop size
 # -------------------
 # |     |     |     |
@@ -42,54 +52,128 @@ ImagePath			$[fvwm_icon]:$[fvwm_icon];.png:+
 # | 0 1 | 1 1 | 2 1 |
 # |     |     |     |
 # -------------------
-DeskTopSize			3x1
+# 一行4个
+DeskTopSize					4x1
 
+# 鼠标移动到屏幕边缘时,则x%滚动到下一个页面.
+# 多显示建议使用0,表示不会0%滚动到下一个页面
+EdgeScroll          		0 0
+# 设置在滚动发生之前需要多少“阻力”或时间
+#EdgeResistance				150 150
 
-# EdgeScroll multi-monitors set 0 0
-EdgeScroll          0 0
-
-
-#####
-# Mouse and Focus Behavior
-###########
-Style "*"				FocusFollowsMouse
-
-# Window Max L,R,T,B
+# 设置“可用”屏幕区域 L,R,T,B
 #EwmhBaseStruts 		0 0 22 42
 
+# 窗口移动的风格
+OpaqueMoveSize -1
 
-#####
-# Global Styles and options
-###########
-Style *                 TileCascadePlacement, GrabFocusOff
-Style *                 NoPPosition, ResizeOpaque
-Style *                 DecorateTransient, DontRaiseTransient
-Style *                 DontLowerTransient, StackTransientParent
-Style *                 GrabFocusTransientOff
-Style *                 WindowShadeSteps 20, WindowShadeScrolls
-Style *                 MwmDecor, SlipperyIcon
+# 窗口间靠近快速吸附
+SnapAttraction				10 SameType Screen
+
+
+# #####
+# 颜色配置
+# #########
+
+# 窗口颜色
+# http://fvwm-themes.sourceforge.net/doc/colorsets
+# 0 = Default colors
+# 1 = Inactive windows
+# 2 = Active windows
+# 3 = Inactive menu entry and menu background
+# 4 = Active menu entry
+# 5 = greyed out menu entry (only bg used)
+# 6 = module foreground and background
+# 7 = hilight colors
+Colorset 3 				fg Black, bg #f1ccb8
+Colorset 4 				fg Black, bg #e7dac9
+Colorset 5 				fg White, bg Red
+
+# 菜单颜色
+#Colorset 3 fg #101060, bg #e6e7d7
+#Colorset 4 fg Black,   bg #a6a797
+#Colorset 5 fg White,   bg #f55066
+#Colorset 6 fg white,   bg black, RootTransparent, Tint Black 40
+#Colorset 7 fg White,   bg Black
+#Colorset 23 RootTransparent buffer, fg rgb:ff/ff/c4, bg average, Tint black 20, bgTint black 20
+Colorset 7 				RootTransparent, fg Black, bg average, sh Black, hi #202070, Tint White 60, bgTint White 60
+Colorset 8 				fg DarkRed, bg #e6e7d7, sh Black, hi #202070
+
+# 模块颜色
+Colorset 9 				fg rgb:00/00/00, hi rgb:00/00/00, sh rgb:00/00/00, bg rgb:e9/e9/d9
+Colorset 10 			fg rgb:00/00/00, hi rgb:dd/00/00, sh rgb:dd/00/00, bg rgb:fb/fc/ec
+Colorset 23 			RootTransparent buffer, fg rgb:ff/ff/c4, bg average, Tint black 20, bgTint black 20
+
+
+########
+# 全局 Styles
+#############
+# 所有窗口，都是鼠标移进去的时候得到键盘聚焦，鼠标移出来就失去聚焦
+Style *					FocusFollowsMouse
+# 窗口出现的时候，先试图找一个可以放下它而不挡住其它窗口的地方
+# 如果不行再采用层叠放置的方式
+Style *                 TileCascadePlacement
+# 标题栏上显示按钮
+Style *					GrabFocusOff
+# 可移动
+Style *                 NoPPosition
+# 可调整窗口大小.透明?
+Style * 				ResizeOpaque
+# 对所有名字以 "Fvwm" 开头的窗口(一般都是 FVWM 内部的模块)的设置。
+# 它们都没有标题栏(NoTitle)，而且是sticky，也就是说即使桌面切换
+# 它们也一直显示在屏幕上
+Style *                 DecorateTransient
+# 不允许程序自己选择一个位置放置
+#Style * 				NoPPosition
+# TODO: 瞬时窗口,始终最上层
+
+# TODO: 未知的
+Style *					DontRaiseTransient
+Style *					DontLowerTransient
+Style *					StackTransientParent
+Style *					GrabFocusTransientOff
+Style *					WindowShadeSteps 20
+Style *					WindowShadeScrolls
+Style *					MwmDecor
+Style *					SlipperyIcon
 Style *					IconBox 50 1050 1050 +15
 Style *					StickyIcon
 
 
-## options
-# Window Move style
-OpaqueMoveSize -1
+#####
+# 窗口 Styles
+#############
+Style "*" 				UseDecor WindowDecor
+Style "*" 				Font "xft:Sans:Bold:size=8:minspace=False:antialias=True"
+Style "*" 				BorderWidth 0, HandleWidth 2
+Style "*" 				MWMBorder, FirmBorder
+Style "*" 				Colorset 4
+Style "*" 				HilightColorset 3
+Style "*" 				BorderColorset 5
+Style "*" 				HilightBorderColorset 5
 
-# snap attraction
-SnapAttraction	10 SameType Screen
+# fvwm pager
+Style "FvwmPager" 		NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  						CirculateSkip, StaysOnBottom, FixedPosition, \
+						FixedSize, !Iconifiable
+# icon menu style
+Style "UkkostaButtons"	!Title, !Handles, Sticky, WindowListSkip, \
+					 	CirculateSkip, BorderWidth 0, HandleWidth 0
 
 
 #####
-# Program Styles
-###########
+# 程序 Styles
+#############
 # use xwininfo lookup
 Style "trayer"			!Title, !Borders, Sticky
 Style "FvwmButtons"		NoTitle,WindowListSkip,Sticky,HandleWidth 0,Layer 1
 Style "Desktop"			NoTitle,WindowListSkip,Sticky,HandleWidth 0,Layer 1
 Style "wmCalClock"		Notitle,WindowListSkip
-Style "dingtalk"		!Title
 
+
+############################################################################
+# 函数
+############################################################################
 
 #####
 #
@@ -103,31 +187,39 @@ Style "dingtalk"		!Title
 #
 ###########
 
+
 #####
-# Basic Functions
+# 基础函数
 ###########
+# 鼠标单击最大化
 DestroyFunc			Maximize
 AddToFunc			Maximize
 + "C" 				Maximize 100 100
 
+# 上半屏
 DestroyFunc			TopHalfMix
 AddToFunc			TopHalfMix
 + "I"				Maximize 100 50
 
+# 左半屏
 DestroyFunc         LeftHalfMix
 AddToFunc           LeftHalfMix
 + "I"				Maximize 50 100
 
+# 全屏
 DestroyFunc			FullScreen
 AddToFunc			FullScreen
 + "I"				Maximize 100 100
 
+# 拖动
 DestroyFunc 		DragMove
 AddToFunc 			DragMove M move
 
+# 缩放
 DestroyFunc 		DragResize
 AddToFunc 			DragResize M resize
 
+# WindowList的时候,鼠标移动到窗口中间
 DestroyFunc 		WindowListFunc
 AddToFunc 			WindowListFunc
 + "I"                 Iconify off
@@ -135,7 +227,10 @@ AddToFunc 			WindowListFunc
 + "I"                 Raise
 + "I"                 WarpToWindow 50 50
 
-# Volume Control
+
+#####
+# 音量控制
+# #########
 DestroyMenu Volume
 AddtoMenu Volume  "<Volume>" Title
 
@@ -154,60 +249,76 @@ AddtoMenu Volume  "<Volume>" Title
 
 
 #####
-# Program Launching Functions
-###########
-
-
-#####
-# Startup Functions
+# 启动函数
 ###########
 DestroyFunc			StartFunction
 AddToFunc 			StartFunction
+# 背景模块
 + I Module 			FvwmBacker
+# 页面模块
 + I Module			FvwmPager *
-+ I Module			FvwmAnimate
+# 自动聚焦窗口模块
 + I Module			FvwmAuto 500 Raise Nop
-+ I Module			FvwmButtons IconMenu
-+ I Module			FvwmButtons ClockDock
-#+ I Exec			exec xset s 10800  # 设置屏保时间，取消xset s off
-#+ I Exec 			exec trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true
-#+ I Exec			exec xcompmgr
+# 按钮模块
++ I Module			FvwmButtons UkkostaButtons
+# 动画模块
++ I Module 			FvwmAnimate
+# 关闭数字锁
 + I Exec			exec numlockx off
+# 切换按键
 #+ I Exec			exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
 #+ I Exec			exec setxkbmap -option "ctrl:swapcaps"
+# 设置屏保
+#+ I Exec			exec xset s 10800  # 设置屏保时间，取消xset s off
+# 托盘
+#+ I Exec 			exec trayer --edge top --align right --transparent true --height 20 --alpha 120 --tint black --widthtype request --heighttype request --SetDockType true --SetPartialStrut false --expand true
+# 窗口加速,主要用于半透明
+#+ I Exec			exec xcompmgr
 
+
+##########################################################################
+# 按键绑定
+# ########################################################################
 
 #####
-# Basic Bindings
+# 基础绑定
 ###########
 
-# widows close,max,mini##
+# 窗口关闭,最小化,最大化
+# 鼠标左键,窗口124位置
 Mouse 1 1	A		Close
 Mouse 1 4	A		Iconify
 Mouse 1 2 	A		Maximize
-# inovke root menu: mouse left click
+
+# 窗口移动,按住Alt,鼠标左键按住并移动
 Mouse 1 W   HM      DragMove
+# 窗口缩放,按住Alt,鼠标右键按住并移动
 Mouse 3 W   HM      DragResize 
 
-# shutkey
+######
+# 快捷键
+# #######
+# 同时按住Alt+
+key 1 		A M		GoToPage 0 0
+key 2 		A M		GoToPage 1 0
+key 3 		A M     GoToPage 2 0
+key 4 		A M     GoToPage 3 0
+key t 		A M		Exec exec urxvt
+key p 		A M		Exec exec scrot '%Y-%m-%d-%T-screenshot.png' -e 'mv $f $HOME/Screenshot/'
+key Escape 	A M		Close
+
+# 同时按住Ctrl,Alt+
 Key z W	CM			Move 0p 20p
-Key r A	CM			Restart
 Key l A CM			Exec exec slock
 key h W CM			TopHalfMix
 key v W CM			LeftHalfMix
 key f W CM			FullScreen
 
-key 1 A M			GoToPage 0 0
-key 2 A M			GoToPage 1 0
-key 3 A M           GoToPage 2 0
-key t A M			Exec exec urxvt
-key p A M			Exec exec scrot '%Y-%m-%d-%T-screenshot.png' -e 'mv $f $HOME/Screenshot/'
-key Escape A M		Close
-key i A M			Iconify
-
+# 同时按住Ctrl,Atl,Shift+
 key 1 W SCM	PointerWindow	MoveToPage 0 0
 key 2 W SCM	PointerWindow	MoveToPage 1 0
 key 3 W SCM	PointerWindow	MoveToPage 2 0
+key 4 W SCM	PointerWindow	MoveToPage 3 0
 
 # Fn key
 key XF86Explorer			A	N	Exec exec rox
@@ -224,72 +335,38 @@ key XF86AudioRaiseVolume	A	N	Exec exec amixer -q sset Master 1+ unmute
 
 
 #####
-# Window Colorsets
-###########
-# window color set
-# http://fvwm-themes.sourceforge.net/doc/colorsets
-# 0 = Default colors
-# 1 = Inactive windows
-# 2 = Active windows
-# 3 = Inactive menu entry and menu background
-# 4 = Active menu entry
-# 5 = greyed out menu entry (only bg used)
-# 6 = module foreground and background
-# 7 = hilight colors
-Colorset 5 fg White,   bg Red
-Colorset 3 fg Black,   bg #f1ccb8
-Colorset 4 fg Black,   bg #e7dac9
-
-
-#####
-# Window Decor
+# 窗口装饰
 ###########
 DestroyDecor WindowDecor
 AddToDecor   WindowDecor
+# 标题风格
 + TitleStyle LeftJustified Height 14
++ TitleStyle -- Flat
+
+# 按钮1风格
 + ButtonStyle 1 ActiveUp   Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
 + ButtonStyle 1 ActiveDown Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
 + ButtonStyle 1 Inactive   Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
 
+# 按钮4风格
 + ButtonStyle 4 ActiveUp   Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
 + ButtonStyle 4 ActiveDown Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
 + ButtonStyle 4 Inactive   Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
 
+# 按钮2风格
 + ButtonStyle 2 ActiveUp   Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
 + ButtonStyle 2 ActiveDown Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
 + ButtonStyle 2 Inactive   Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
-+ TitleStyle -- Flat
-+ BorderStyle Simple -- NoInset Flat
+
+# 按钮全局风格
 + ButtonStyle All -- UseTitleStyle
 
-
-#####
-# Window Styles
-###########
-Style "*" 				UseDecor WindowDecor
-Style "*" 				Font "xft:Sans:Bold:size=8:minspace=False:antialias=True"
-Style "*" 				BorderWidth 0, HandleWidth 2
-Style "*" 				MWMBorder, FirmBorder
-Style "*" 				Colorset 4
-Style "*" 				HilightColorset 3
-Style "*" 				BorderColorset 5
-Style "*" 				HilightBorderColorset 5
-
-#####
-# Menu Colorsets
-###########
-#Colorset 3 fg #101060, bg #e6e7d7
-#Colorset 4 fg Black,   bg #a6a797
-#Colorset 5 fg White,   bg #f55066
-#Colorset 6 fg white,   bg black, RootTransparent, Tint Black 40
-#Colorset 7 fg White,   bg Black
-#Colorset 23 RootTransparent buffer, fg rgb:ff/ff/c4, bg average, Tint black 20, bgTint black 20
-Colorset 7 RootTransparent, fg Black, bg average, sh Black, hi #202070, Tint White 60, bgTint White 60
-Colorset 8 fg DarkRed, bg #e6e7d7, sh Black, hi #202070
+# 边框风格
++ BorderStyle Simple -- NoInset Flat
 
 
 #####
-# MenuStyles
+# 菜单风格
 ###########
 MenuStyle * PopupDelayed, PopupDelay 300, PopdownImmediately
 MenuStyle * PopupOffset -5 100, TitleWarpOff
@@ -306,10 +383,10 @@ MenuStyle * Font "Shadow=2:xft:Sans:Bold:size=11:antialias=True"
 
 
 #####
-# FvwmRootMenu
-###########
+# Fvwm根菜单
+############
 DestroyMenu			MenuFvwmRoot	
-AddToMenu			MenuFvwmRoot "Fvwm" Title
+AddToMenu			MenuFvwmRoot 	"Fvwm" Title
 + "&1.Rxvt%icons/terminal.png%"	     Exec exec $[infostore.terminal]
 + "Volume"        					 Popup   Volume
 + ""				                 Nop
@@ -321,19 +398,11 @@ AddToMenu			MenuFvwmRoot "Fvwm" Title
 + "&Quit%icons/quit.png%"	         Quit
 
 
-#####
-# Module Colorsets
-###########
-Colorset 9 fg rgb:00/00/00, hi rgb:00/00/00, sh rgb:00/00/00, bg rgb:e9/e9/d9
-Colorset 10 fg rgb:00/00/00, hi rgb:dd/00/00, sh rgb:dd/00/00, bg rgb:fb/fc/ec
-Colorset 23 RootTransparent buffer, fg rgb:ff/ff/c4, bg average, Tint black 20, bgTint black 20
 
 
 #####
 # FvwmPager
 ###########
-Style "FvwmPager" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
-  CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
 
 DestroyModuleConfig FvwmPager: *
 *FvwmPager: Geometry -10-10
@@ -352,66 +421,52 @@ DestroyModuleConfig FvwmPager: *
 
 
 #####
-# ClockButtons
+# 菜单栏
 ###########
-# TZ=":Etc/GMT-9" wmcalclock
-# clock style
-Style 				"ClockDock" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip, BorderWidth 0, HandleWidth 0
-
-# clock
-DestroyModuleConfig ClockDock: *
-*ClockDock: 			ButtonGeometry 64x64+0+0
-*ClockDock: 			Columns 1
-*ClockDock: 			Colorset 23
-*ClockDock: 			Frame 0
-*ClockDock: 			(Frame 0 ,Swallow "wmCalClock" 'Exec wmCalClock -24 -b 100') 
-
-#####
-# IconMenuButtons
-###########
-# icon menu style
-Style               "IconMenu" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip, BorderWidth 0, HandleWidth 0
 
 # icon menu
-DestroyModuleConfig         IconMenu: *
-*IconMenu:			Colorset 23
-*IconMenu:			Frame 0
-*IconMenu:			Font	5x8
-*IconMenu:			Geometry +0+300
-*IconMenu:			Columns		2
-*IconMenu:			ActiveColorset 6
+DestroyModuleConfig         UkkostaButtons: *
+*UkkostaButtons:			Colorset 23
+*UkkostaButtons:			Frame 0
+*UkkostaButtons:			Font	5x8
+*UkkostaButtons:			Geometry +0+0
+*UkkostaButtons:			Rows		1
+*UkkostaButtons:			ActiveColorset 6
 
-*IconMenu(, Icon        rxvt_$[fvwm_icon_size].png, Action 'Exec $[infostore.terminal] &')
-*IconMenu(, Icon     firefox_$[fvwm_icon_size].png, Action 'Exec firefox &')
-*IconMenu(, Icon libreoffice_$[fvwm_icon_size].png, Action 'Exec libreoffice &')
-*IconMenu(, Icon    keepassx_$[fvwm_icon_size].png, Action 'Exec keepassx &')
-*IconMenu(, Icon     dbeaver_$[fvwm_icon_size].png, Action 'Exec dbeaver &')
-*IconMenu(, Icon    dingtalk_$[fvwm_icon_size].png, Action 'Exec cd $HOME/Repos/dingtalk; npm start &')
-*IconMenu(, Icon       medis_$[fvwm_icon_size].png, Action 'Exec cd $HOME/Repos/medis; npm start &')
+*UkkostaButtons(3x1, Swallow DateTime 'Module FvwmScript $[FVWM_USERDIR]/scripts/DateTime')
+*UkkostaButtons(, Icon        rxvt_$[fvwm_icon_size].png, Action(Mouse 1) 'Exec $[infostore.terminal] &')
+*UkkostaButtons(, Icon     firefox_$[fvwm_icon_size].png, Action(Mouse 1) 'Exec firefox &')
+*UkkostaButtons(, Icon libreoffice_$[fvwm_icon_size].png, Action(Mouse 1) 'Exec libreoffice &')
+*UkkostaButtons(, Icon    keepassx_$[fvwm_icon_size].png, Action(Mouse 1) 'Exec keepassx &')
+*UkkostaButtons(, Icon     dbeaver_$[fvwm_icon_size].png, Action(Mouse 1) 'Exec dbeaver &')
+*UkkostaButtons(, Icon    dingtalk_$[fvwm_icon_size].png, Action(Mouse 1) 'Exec /opt/apps/com.alibabainc.dingtalk/files/Elevator.sh &')
+*UkkostaButtons(, Icon       xmind_$[fvwm_icon_size].png, Action(Mouse 1) 'Exec cd /opt/xmind8/XMind_amd64; ./XMind &')
+*UkkostaButtons(, Icon        ardm_$[fvwm_icon_size].png, Action(Mouse 1) 'Exec /opt/ardm.bin --no-sandbox &')
+*UkkostaButtons(, Icon     vivaldi_$[fvwm_icon_size].png, Action(Mouse 1) 'Exec vivaldi &')
+*UkkostaButtons(, Icon     stretchly_$[fvwm_icon_size].png, Action(Mouse 1) 'Exec stretchly &')
 
 
-# exit function
-#DestroyFunc			ExitFunction
-#AddToFunc			ExitFunction
-#+ I Exec            exec killall FvwmPager
-#+ I Exec            exec killall FvwmAnimate
-#+ I Exec            exec killall FvwmAuto
-#+ I Exec            exec killall FvwmButtons
-#+ I Exec            exec killall FvwmBacker
+#######
+# 设置背景图片
+# ############
+#*FvwmBacker: Command(Desk 0, Page 0 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
+*FvwmBacker: Command(Desk 0) Exec feh --bg-fill $[fvwm_img]/cropped-2560x1440.jpg --bg-fill $[fvwm_img]/cropped-2560x1440.png
+#*FvwmBacker: Command(Desk 0, Page 2 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png --bg-fill $[fvwm_img]/wall_03.jpg
 
-## fvwm module
-# fvwm pager
-#*FvwmPagerLabel		0 Desktop
-#*FvwmPager:			Geometry -10-10
-#*FvwmPager:			Colorset * 23
-#*FvwmPager: 		HilightColorset * 6
 
-# setting background
-*FvwmBacker: Command(Desk 0, Page 0 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
-*FvwmBacker: Command(Desk 0, Page 1 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
-*FvwmBacker: Command(Desk 0, Page 2 0) Exec feh --bg-fill $[fvwm_img]/wall_01.png
+# #######################################################################
+# 事件
+# #######################################################################
+# 启动时,钉钉移动到左上角
+DestroyModuleConfig 		FE-StartMoved: *
+*FE-StartMoved: 			Cmd Function
+*FE-StartMoved: 			add_window StartMoved
+    
+Module FvwmEvent 			FE-StartMoved
 
-# fvwm animate
-#*FvwmAnimate:		Delay 25
-#*FvwmAnimate:		Effect Random
-#*FvwmAnimate:		Width 3
+
+DestroyFunc 				StartMoved
+AddToFunc   				StartMoved
++ I ThisWindow ("钉钉")		Move 0p 32p
++ I ThisWindow ("钉钉")		WindowStyle FixedPosition
++ I UpdateStyles
