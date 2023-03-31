@@ -24,7 +24,7 @@ linux 通用配置
 * keepassx
 * firefox-esr
 * libreoffice
-
+* pnmixer
 
 ## fonts
 
