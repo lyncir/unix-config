@@ -4,6 +4,8 @@ linux 通用配置
 
 ## 软件依赖
 
+* picom(https://github.com/dccsillag/picom)
+
 * feh
 * fcitx
 * fvwm
