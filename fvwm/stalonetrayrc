@@ -1,0 +1,10 @@
+decorations none
+geometry 10x1
+icon_size 20
+slot_size 24
+kludges force_icons_size
+max_geometry 10x1
+parent_bg true
+transparent false
+icon_gravity SE
+no_shrink true

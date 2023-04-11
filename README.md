@@ -5,24 +5,25 @@ linux 通用配置
 ## 软件依赖
 
 * picom(https://github.com/dccsillag/picom)
-
-* feh
+* rxvt-unicode
 * fcitx
+* flameshot
+* firefox-esr
 * fvwm
 * vim
-* trayer
-* rxvt-unicode
-* ncmpcpp
-* xcompmgr
-* wmCalClock
+* redshift
+* feh
+* stalonetray
+* numlockx
 * slock
+
+* ncmpcpp
+* wmCalClock
 * rox-filer
-* flameshot
 * dbever
 * medis
 * xpad
 * keepassx
-* firefox-esr
 * libreoffice
 * pnmixer
 
