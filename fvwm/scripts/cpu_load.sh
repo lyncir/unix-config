@@ -73,7 +73,7 @@ data_list=()
 for (( i=0; i<$cpucount; i++ ))
     do
 	usage=`calculate "${cpu_start[$i]}" "${cpu_end[$i]}"`
-	data_list+=( $usage )
+	data_list+=( $(printf "%.0f" $usage) )
 
 done
 
