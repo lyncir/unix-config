@@ -4,18 +4,18 @@ Font "xft:Sans:style=Bold:size=9"
 
 Init
  Begin
-  Set $RAMu = (GetOutput {exec ~/.fvwm/scripts/mem_usage.sh} 1 -1) 
+  Set $mem = (GetOutput {exec ~/.fvwm/scripts/mem_usage.sh} 1 -1) 
 
-  ChangeTitle 1 $RAMu
+  ChangeTitle 1 $mem
  End
 
 PeriodicTasks
  Begin 
   If (RemainderOfDiv (GetTime) 15)==0 Then
   Begin
-   Set $RAMu = (GetOutput {exec ~/.fvwm/scripts/mem_usage.sh} 1 -1)
+   Set $mem = (GetOutput {exec ~/.fvwm/scripts/mem_usage.sh} 1 -1)
 
-   ChangeTitle 1 $RAMu
+   ChangeTitle 1 $mem
   End
  End
 
