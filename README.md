@@ -40,3 +40,5 @@ linux 通用配置
 
     cp fonts/Microsoft-YaHei-Mono.ttf /usr/local/share/fonts/
 	fc-cache
+
+    sensors-detect
