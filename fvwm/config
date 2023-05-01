@@ -68,7 +68,7 @@ AddToFunc	StartFunction
 
 # 启动程序
 # 切换按键 Caps<=>Ctrl Alt<=>Win
-+ I Exec exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
+#+ I Exec exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
 # 开启数字锁
 + I Exec exec numlockx on
 # 设置自动关闭屏幕时间 1800s
@@ -297,9 +297,9 @@ ButtonStyle 4 - MwmDecorMin
 
 # 面板
 # ---------------------------------------------------------
-# |Time|cpu|mem|temp|          | | | | |             |Time|
+# |Time| | | |          |cpu|mem|fan|net|             |stray|
 # ---------------------------------------------------------
-#                               Buttons
+#      Buttons             Monitor
 DestroyModuleConfig MainPanel:*
 # 高24,屏幕的宽,左上角
 *MainPanel: Geometry $[monitor.$[monitor.primary].width]x$[infostore.panel_height]+0+0
@@ -316,16 +316,27 @@ DestroyModuleConfig MainPanel:*
 *MainPanel: Padding 2 2
 
 # 左侧
-# 时间脚本内有宽高设定
+# 时间脚本内有宽高设定 123
 *MainPanel: (123x1, Swallow DateTime 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/DateTime', Frame 0)
-*MainPanel: (123x1, Swallow tray10 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/tray10', Frame 0)
+# 空白 10
+*MainPanel: (10x1, Frame 0)
+# 快捷按钮 24
+*MainPanel: ($[infostore.panel_height]x1, Icon terminal.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec $[infostore.terminal] &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon firefox.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec firefox &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon libreoffice.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec libreoffice &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon keepassx.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec keepassx &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon dbeaver.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec dbeaver &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon dingtalk.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec /opt/apps/com.alibabainc.dingtalk/files/Elevator.sh &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon xmind.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec cd /opt/xmind8/XMind_amd64; ./XMind &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon ardm.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec /opt/ardm.bin --no-sandbox &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon vivaldi.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec vivaldi &', Frame 0)
 
 # 中间
-*MainPanel: (500x1, Frame 0)
-*MainPanel: ($[infostore.panel_height]x1, Icon firefox.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec firefox &', Frame 0)
-*MainPanel: ($[infostore.panel_height]x1, Icon flameshot.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec flameshot &', Frame 0)
+*MainPanel: (900x1, Frame 0)
+*MainPanel: (123x1, Swallow tray10 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/tray10', Frame 0)
 
 # 右侧 图标尺寸为24,最多放10个图标,那么就是24x10=240宽
+*MainPanel: (948x1, Frame 0)
 Test (x stalonetray) *MainPanel: (240x1, Swallow(NoClose,UseOld) stalonetray 'Exec exec stalonetray --config "$[FVWM_USERDIR]/stalonetrayrc"', Frame 0)
 
 
@@ -362,6 +373,6 @@ Module FvwmEvent 			FE-StartMoved
 
 DestroyFunc 				StartMoved
 AddToFunc   				StartMoved
-+ I ThisWindow ("钉钉")		Move 0p 32p
++ I ThisWindow ("钉钉")		Move 0p 24p
 + I ThisWindow ("钉钉")		WindowStyle FixedPosition
 + I UpdateStyles
