@@ -1,3 +1,0 @@
-WindowId
-Echo $[desk.n] $[page.nx] $[w.class]
-Current Echo $[desk.n] $[page.nx] $[w.class]
