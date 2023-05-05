@@ -77,6 +77,7 @@ for (( i=0; i<$cpucount; i++ ))
 
 done
 
-echo "${data_list[*]}" | sort -nr | head -n1
+load=`echo "${data_list[*]}" | sort -nr | head -n1`
+echo "CPU: $load"
 
 IFS=$oldIFS

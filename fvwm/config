@@ -333,7 +333,7 @@ DestroyModuleConfig MainPanel:*
 
 # 中间
 *MainPanel: (900x1, Frame 0)
-*MainPanel: (123x1, Swallow tray10 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/tray10', Frame 0)
+*MainPanel: (123x1, Swallow LoadMeter 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/LoadMeter', Frame 0)
 
 # 右侧 图标尺寸为24,最多放10个图标,那么就是24x10=240宽
 *MainPanel: (948x1, Frame 0)

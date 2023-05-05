@@ -1,0 +1,75 @@
+WindowTitle {LoadMeter}
+WindowSize  570 24
+Font "xft:Sans:style=Bold:size=9" 
+
+Init
+ Begin
+  Set $cpu_load = (GetOutput {exec ~/.fvwm/scripts/cpu_load.sh} 1 -1) 
+  Set $mem_usage= (GetOutput {exec ~/.fvwm/scripts/mem_usage.sh} 1 -1) 
+  Set $net_speed = (GetOutput {exec ~/.fvwm/scripts/net_speed.sh} 1 -1) 
+
+  ChangeTitle 1 $cpu_load
+  ChangeTitle 2 $mem_usage
+  ChangeTitle 3 $net_speed
+ End
+
+PeriodicTasks
+ Begin 
+  If (RemainderOfDiv (GetTime) 1)==0 Then
+  Begin
+    Set $cpu_load = (GetOutput {exec ~/.fvwm/scripts/cpu_load.sh} 1 -1) 
+    Set $mem_usage= (GetOutput {exec ~/.fvwm/scripts/mem_usage.sh} 1 -1) 
+    Set $net_speed = (GetOutput {exec ~/.fvwm/scripts/net_speed.sh} 1 -1) 
+
+    ChangeTitle 1 $cpu_load
+    ChangeTitle 2 $mem_usage
+    ChangeTitle 3 $net_speed
+  End
+ End
+
+Widget 1
+Property
+ Position 0 0
+ Size 50 24
+ Font "xft:Sans:style=Bold:size=8"
+ Type ItemDraw
+ Flags NoReliefString
+ Title {}
+Main
+ Case message of
+  SingleClic :
+  Begin
+  End
+End
+
+
+Widget 2
+Property
+ Position 70 0
+ Size 65 24
+ Font "xft:Sans:style=Bold:size=8"
+ Type ItemDraw
+ Flags NoReliefString
+ Title {}
+Main
+ Case message of
+  SingleClic :
+  Begin
+  End
+End
+
+
+Widget 3
+Property
+ Position 140 0
+ Size 120 24
+ Font "xft:Sans:style=Bold:size=8"
+ Type ItemDraw
+ Flags NoReliefString
+ Title {}
+Main
+ Case message of
+  SingleClic :
+  Begin
+  End
+End
