@@ -80,6 +80,7 @@ Plug 'junegunn/vim-easy-align'
 " 语言相关
 " python
 Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'vim-syntastic/syntastic'
 
 " lsp
 Plug 'yegappan/lsp'
@@ -214,7 +215,6 @@ let lspServers = [
 autocmd VimEnter * call LspAddServer(lspServers)
 
 let lspOpts = {
-	 \  'autoPopulateDiags': v:true,
 	 \  'autoHighlightDiags': v:true,
 	 \  'showDiagWithVirtualText': v:true,
 	 \  'diagVirtualTextAlign': 'below',
@@ -265,6 +265,28 @@ augroup END
 " Override highlight setting.
 highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
 highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
+
+
+""""""""""""
+" 语法校验
+"""""""""""
+" syntastic
+" https://github.com/vim-syntastic/syntastic.git
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_python_checkers = ['flake8']
+" disable python flake8 line to long error check
+let g:syntastic_python_flake8_args = "--ignore=E501,E402,W503"
+" disable style checking
+"let g:syntastic_quiet_messages = {"type": "style"}
+map <leader>8 :SyntasticToggleMode<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
