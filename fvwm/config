@@ -190,6 +190,9 @@ DefaultFont "xft:Sans:Bold:size=8:minspace=False:antialias=True"
 # 如果不行再采用层叠放置的方式
 Style "*" TileCascadePlacement
 
+# 所有窗口，都是鼠标移进去的时候得到键盘聚焦，鼠标移出来就失去聚焦
+Style "*" FocusFollowsMouse
+
 # 瞬时窗口(比如打开文件窗口)
 Style "*" DecorateTransient, StackTransientParent
 Style "*" !FPGrabFocusTransient, FPReleaseFocusTransient
@@ -206,7 +209,7 @@ Style "*" !Icon
 # 可以使用xwininfo(x11-utils)查看窗口名字
 # 面板
 Style "MainPanel" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip, \
-				  BorderWidth 0, HandleWidth 0
+				  BorderWidth 0, HandleWidth 0, StaysOnBottom
 # Pager
 Style "FvwmPager" !Title, !Handles, !Borders, Sticky, WindowListSkip, \
 				  !Iconifiable, FixedPosition
