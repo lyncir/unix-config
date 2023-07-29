@@ -330,6 +330,7 @@ DestroyModuleConfig MainPanel:*
 *MainPanel: ($[infostore.panel_height]x1, Icon xmind.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec cd /opt/xmind8/XMind_amd64; ./XMind &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon ardm.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec /opt/ardm.bin --no-sandbox &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon vivaldi.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec vivaldi &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon stretchly.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec stretchly &', Frame 0)
 
 # 中间
 *MainPanel: (900x1, Frame 0)
@@ -367,12 +368,16 @@ DestroyModuleConfig FvwmPager: *
 DestroyModuleConfig 		FE-StartMoved: *
 *FE-StartMoved: 			Cmd Function
 *FE-StartMoved: 			add_window StartMoved
-    
+	
 Module FvwmEvent 			FE-StartMoved
 
 
 DestroyFunc 				StartMoved
 AddToFunc   				StartMoved
-+ I ThisWindow ("钉钉")		Move 0p 24p
++ I ThisWindow ("钉钉")		Move 0p 0p
 + I ThisWindow ("钉钉")		WindowStyle FixedPosition
 + I UpdateStyles
+
+
+####Alt+Tab windowlist####
+Key Tab A M WindowList Root c c CurrentAtEnd, IconifiedAtEnd, ShowScreen
