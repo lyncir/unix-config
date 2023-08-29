@@ -327,7 +327,7 @@ DestroyModuleConfig MainPanel:*
 *MainPanel: ($[infostore.panel_height]x1, Icon terminal.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec $[infostore.terminal] &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon firefox.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec firefox &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon libreoffice.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec libreoffice &', Frame 0)
-*MainPanel: ($[infostore.panel_height]x1, Icon keepassx.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec keepassx &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon keepassx.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec keepassxc &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon dbeaver.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec dbeaver &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon dingtalk.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec /opt/apps/com.alibabainc.dingtalk/files/Elevator.sh &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon xmind.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec cd /opt/xmind8/XMind_amd64; ./XMind &', Frame 0)
@@ -336,11 +336,11 @@ DestroyModuleConfig MainPanel:*
 *MainPanel: ($[infostore.panel_height]x1, Icon stretchly.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec stretchly &', Frame 0)
 
 # 中间
-*MainPanel: (900x1, Frame 0)
+*MainPanel: (600x1, Frame 0)
 *MainPanel: (123x1, Swallow LoadMeter 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/LoadMeter', Frame 0)
 
 # 右侧 图标尺寸为24,最多放10个图标,那么就是24x10=240宽
-*MainPanel: (948x1, Frame 0)
+*MainPanel: (600x1, Frame 0)
 Test (x stalonetray) *MainPanel: (240x1, Swallow(NoClose,UseOld) stalonetray 'Exec exec stalonetray --config "$[FVWM_USERDIR]/stalonetrayrc"', Frame 0)
 
 
