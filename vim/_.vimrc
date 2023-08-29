@@ -342,3 +342,6 @@ hi Normal  ctermfg=252 ctermbg=none
 " 关闭折叠
 set foldmethod=manual
 set foldlevel=100
+
+" 显示tab 启用: set invlist
+set listchars=tab:▷▷⋮
