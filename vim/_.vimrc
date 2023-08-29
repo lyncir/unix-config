@@ -88,6 +88,9 @@ Plug 'yegappan/lsp'
 " 拼写检查
 Plug 'kamykn/spelunker.vim'
 
+" Godot
+Plug 'habamax/vim-godot'
+
 call plug#end()
 
 
@@ -225,6 +228,20 @@ autocmd VimEnter * call LspOptionsSet(lspOpts)
 " 设置提示高亮颜色
 highlight LspDiagVirtualText ctermfg=Red
 highlight link LspDiagLine NONE
+
+
+" Godot
+func! GodotSettings() abort
+    setlocal foldmethod=expr
+    setlocal tabstop=4
+    nnoremap <buffer> <F4> :GodotRunLast<CR>
+    nnoremap <buffer> <F5> :GodotRun<CR>
+    nnoremap <buffer> <F6> :GodotRunCurrent<CR>
+    nnoremap <buffer> <F7> :GodotRunFZF<CR>
+endfunc
+augroup godot | au!
+    au FileType gdscript call GodotSettings()
+augroup end
 
 
 """"""""""""
