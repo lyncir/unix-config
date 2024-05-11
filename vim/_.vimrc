@@ -84,6 +84,7 @@ Plug 'vim-syntastic/syntastic'
 
 " lsp
 Plug 'yegappan/lsp'
+Plug 'dense-analysis/ale'
 
 " 拼写检查
 Plug 'kamykn/spelunker.vim'
@@ -228,6 +229,24 @@ autocmd VimEnter * call LspOptionsSet(lspOpts)
 " 设置提示高亮颜色
 highlight LspDiagVirtualText ctermfg=Red
 highlight link LspDiagLine NONE
+
+
+" 另一个补全,用于gdscript
+let g:ale_linters = {
+\   'gdscript': ['godot'],
+\}
+let g:ale_linters_explicit = 1
+" Enable ALE auto completion globally
+let g:ale_completion_enabled = 1
+" Allow ALE to autoimport completion entries from LSP servers
+let g:ale_completion_autoimport = 1
+" Register LSP server for Godot:
+call ale#linter#Define('gdscript', {
+\   'name': 'godot',
+\   'lsp': 'socket',
+\   'address': '127.0.0.1:6005',
+\   'project_root': 'project.godot',
+\})
 
 
 " Godot
