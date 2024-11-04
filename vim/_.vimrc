@@ -92,6 +92,9 @@ Plug 'kamykn/spelunker.vim'
 " Godot
 Plug 'habamax/vim-godot'
 
+" DEBUG
+Plug 'puremourning/vimspector'
+
 call plug#end()
 
 
@@ -261,6 +264,12 @@ endfunc
 augroup godot | au!
     au FileType gdscript call GodotSettings()
 augroup end
+
+
+""""""""""""
+" DEBUG
+""""""""""""
+let g:vimspector_enable_mappings='HUMAN'
 
 
 """"""""""""
