@@ -266,9 +266,12 @@ augroup godot | au!
 augroup end
 
 
-""""""""""""
-" DEBUG
-""""""""""""
+""""""""""""""""""""""""
+" DEBUG工具: vimspector
+""""""""""""""""""""""""
+" Python: debugpy
+" :VimspectorInstall debugpy
+" Full options: https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 let g:vimspector_enable_mappings='HUMAN'
 
 
