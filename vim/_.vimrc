@@ -208,6 +208,14 @@ nmap ga <Plug>(EasyAlign)
 " 自动补全
 """""""""""""
 " Pthon	
+let lspOpts = {
+	 \  'autoHighlightDiags': v:true,
+	 \  'diagVirtualTextAlign': 'below',
+	 \  'showDiagWithVirtualText': v:true,
+	 \ }
+
+autocmd User LspSetup call LspOptionsSet(lspOpts)
+
 let lspServers = [
 	 \ #{name: 'pyright',
 	 \   filetype: 'python',
@@ -219,15 +227,7 @@ let lspServers = [
 	 \   }}},
 	 \ ]
 
-autocmd VimEnter * call LspAddServer(lspServers)
-
-let lspOpts = {
-	 \  'autoHighlightDiags': v:true,
-	 \  'showDiagWithVirtualText': v:true,
-	 \  'diagVirtualTextAlign': 'below',
-	 \ }
-
-autocmd VimEnter * call LspOptionsSet(lspOpts)
+autocmd User LspSetup call LspAddServer(lspServers)
 
 " 设置提示高亮颜色
 highlight LspDiagVirtualText ctermfg=Red

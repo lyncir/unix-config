@@ -6,3 +6,8 @@ Vimspector requires:
 Vim Install:
 
     ./configure --disable-gui -without-x --enable-python3interp --with-python3-command=python3.13
+
+
+Vimspector config:
+
+    support/test/python/simple_python/.vimspector.json
