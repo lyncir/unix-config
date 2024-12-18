@@ -95,6 +95,10 @@ Plug 'habamax/vim-godot'
 " DEBUG
 Plug 'puremourning/vimspector'
 
+" 代码片段
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 call plug#end()
 
 
@@ -212,6 +216,8 @@ let lspOpts = {
 	 \  'autoHighlightDiags': v:true,
 	 \  'diagVirtualTextAlign': 'below',
 	 \  'showDiagWithVirtualText': v:true,
+	 \  'snippetSupport': v:true,
+	\   'ultisnipsSupport': v:true,
 	 \ }
 
 autocmd User LspSetup call LspOptionsSet(lspOpts)
@@ -273,6 +279,14 @@ augroup end
 " :VimspectorInstall debugpy
 " Full options: https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 let g:vimspector_enable_mappings='HUMAN'
+
+
+""""""""""""""""""""""""
+" 代码片段 ultisnips
+""""""""""""""""""""""""
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 
 """"""""""""
