@@ -283,6 +283,7 @@ let g:vimspector_enable_mappings='HUMAN'
 
 """"""""""""""""""""""""
 " 代码片段 ultisnips
+" next: ctrl-j
 """"""""""""""""""""""""
 "let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
