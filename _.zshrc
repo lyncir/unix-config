@@ -128,3 +128,6 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 # Created by `userpath` on 2020-06-13 03:23:35
 export PATH="$PATH:/home/lyncir/.local/bin"
+
+alias ff="find . -type f -print0 | xargs -0 du -h | sort -rh | head -n 20"
+alias pt="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head"
