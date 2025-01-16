@@ -99,6 +99,9 @@ Plug 'puremourning/vimspector'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
+" reStructuredText
+Plug 'habamax/vim-rst'
+
 call plug#end()
 
 
@@ -379,6 +382,30 @@ map gT :bp<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 其它
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""
+" reStructuredText预览
+" pip install rst2html5
+""""""""""""""""""""""""
+func! s:rst_view() abort
+  let output = tempname() . '.html'
+
+  call system(printf("%s %s %s",
+        \ "rst2html5",
+        \ shellescape(expand("%:p")),
+        \ output
+        \ ))
+
+  " Comment/Uncomment what is appropriate
+  " Windows
+  "exe ':silent !start ' . output
+  " OSX
+  " exe ':silent !xdg-open ' . output
+  " Linux
+   exe ':silent !open ' . output
+endfunc
+
+command! -buffer RSTView call s:rst_view()
+
 """"""""""""""""""""""""
 " add python file header
 """"""""""""""""""""""""
