@@ -339,8 +339,20 @@ DestroyModuleConfig MainPanel:*
 *MainPanel: (600x1, Frame 0)
 *MainPanel: (123x1, Swallow LoadMeter 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/LoadMeter', Frame 0)
 
+# 音乐 
+# ---------------------------------------------------------
+# | << | 口 | i> | >> | title | second
+# ---------------------------------------------------------
+*MainPanel: (300x1, Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon player_rew.png Action(Mouse 1) 'Exec exec echo -e "previous\\nclose"|nc 127.0.0.1 6600', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon player_stop.png Action(Mouse 1) 'Exec exec echo -e "stop\\nclose"|nc 127.0.0.1 6600', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon player_play.png Action(Mouse 1) `Exec exec mpc status|grep -q '\[playing\]\|\[paused\]' && mpc -h 127.0.0.1 -p 6600 toggle || mpc -h 127.0.0.1 -p 6600 play`, Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon player_fwd.png Action(Mouse 1) 'Exec exec echo -e "next\\nclose"|nc 127.0.0.1 6600', Frame 0)
+*MainPanel: (400x1, Swallow MpdSongInfo 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/MpdSongInfo', Frame 0)
+
+
 # 右侧 图标尺寸为24,最多放10个图标,那么就是24x10=240宽
-*MainPanel: (600x1, Frame 0)
+*MainPanel: (400x1, Frame 0)
 Test (x stalonetray) *MainPanel: (240x1, Swallow(NoClose,UseOld) stalonetray 'Exec exec stalonetray --config "$[FVWM_USERDIR]/stalonetrayrc"', Frame 0)
 
 

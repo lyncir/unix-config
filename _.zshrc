@@ -130,4 +130,4 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH="$PATH:/home/lyncir/.local/bin"
 
 alias ff="find . -type f -print0 | xargs -0 du -h | sort -rh | head -n 20"
-alias pt="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head"
+alias pt="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head -20"
