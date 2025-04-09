@@ -22,7 +22,7 @@ URxvt.cursorBlink:True
 ! 真透明
 ! 设置前景色
 URxvt.foreground: grey80
-!URxvt*foreground : #00FF00
+!URxvt*foreground : #666699
 ! 设置背景色
 URxvt.background: rgba:0000/0000/0000/dddd
 !URxvt*background : #000000
@@ -36,53 +36,17 @@ URxvt.font:xft:DejaVu Sans Mono:size=8:style=Book:antialias=true,xft:Microsoft Y
 URxvt.boldfont:xft:DejaVu Sans Mono:size=8:style=Bold:antialias=true,xft:Microsoft YaHei Mono:size=8:style=Bold:antialias=true
 
 
-xosview*title: volticor
-xosview*captions: False
-xosview*labels: False
-xosview*usedlabels: False
-xosview*borderwidth: 0
-xosview*font: fixed
-xosview*foreground: black
-xosview*background: #003c3c
-xosview*cpuGraph: True
-xosview*memGraph: False
-xosview*netBandwidth: 150000
-xosview*netDecay: False
-xosview*netGraph: True
-xosview*diskGraph: True
-xosview*diskDecay: False
-xosview*diskUsedFormat: percent
+! 重新定义16个"ASCII"颜色
+! Normal      Bright
+!--------    -------
+!0 Black      8 Black
+!1 Red        9 Red
+!2 Yellow    10 Yellow
+!3 Green     11 Green
+!4 Blue      12 Blue
+!5 Magenta   13 Magenta
+!6 Cyan      14 Cyan
+!7 White     15 White
 
-xosview*battery: False
-xosview*gfx: False
-xosview*net: False
-xosview*page: False
-xosview*disk: False
-xosview*interrupts: False
-xosview*load: False
-xosview*swap: False
-xosview*lmstemp: False
-xosview*cpu: False
-xosview*mem: False
-xosview*wireless: False
-
-xosview*cpuFreeColor: #2d2d2d
-xosview*cpuUserColor: #900000
-xosview*cpuFormat: all
-xosview*memFreeColor: #2d2d2d
-xosview*memUsedColor: #900000
-xosview*memCacheColor: #006000
-xosview*diskIdleColor: #2d2d2d
-xosview*diskWriteColor: #900000
-xosview*diskReadColor: #000090
-xosview*netBackground: #2d2d2d
-xosview*netInColor: #000090
-xosview*netOutColor: #900000
-xosview*batteryLeftColor: #900000
-xosview*batteryUsedColor: #2d2d2d
-xosview*batteryChargeColor: #006000
-xosview*batteryFullColor: #009000
-xosview*batteryLowColor: #a00000
-xosview*batteryCritColor: #f00000
-xosview*batteryNoneColor: #2d2d2d
-xosview*batteryPriority: 30
+*color4:  #0055AA
+*color12: #0088CC
