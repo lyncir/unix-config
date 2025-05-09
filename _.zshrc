@@ -1,7 +1,7 @@
 #!/bin/zsh
 #历史纪录
 TERM=xterm
-export HISTSIZE=100000
+export HISTSIZE=1000000
 export HISTFILE="$HOME/.zhistory"
 export SAVEHIST=$HISTSIZE
 # append history record

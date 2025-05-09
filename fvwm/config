@@ -330,7 +330,7 @@ DestroyModuleConfig MainPanel:*
 *MainPanel: ($[infostore.panel_height]x1, Icon keepassx.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec keepassxc &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon dbeaver.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec dbeaver &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon dingtalk.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec /opt/apps/com.alibabainc.dingtalk/files/Elevator.sh &', Frame 0)
-*MainPanel: ($[infostore.panel_height]x1, Icon xmind.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec cd /opt/xmind8/XMind_amd64; ./XMind &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon xmind.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec /opt/xmind/xmind.sh &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon ardm.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec /opt/ardm.bin --no-sandbox &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon vivaldi.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec vivaldi &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon stretchly.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec stretchly &', Frame 0)

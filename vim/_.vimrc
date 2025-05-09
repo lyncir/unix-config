@@ -226,10 +226,10 @@ let lspOpts = {
 autocmd User LspSetup call LspOptionsSet(lspOpts)
 
 let lspServers = [
-	 \ #{name: 'pyright',
+	 \ #{name: 'ruff',
 	 \   filetype: 'python',
-	 \   path: '/home/lyncir/.local/share/nvim/lsp_servers/pyright/node_modules/.bin/pyright-langserver',
-	 \   args: ['--stdio'],
+	 \   path: '/home/lyncir/.local/bin/ruff',
+	 \   args: ['server'],
 	 \   workspaceConfig: #{
 	 \     python: #{
 	 \       pythonPath: '~/Repos/env_2.7/bin/python2.7'
