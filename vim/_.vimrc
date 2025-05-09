@@ -80,11 +80,12 @@ Plug 'junegunn/vim-easy-align'
 " 语言相关
 " python
 Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'vim-syntastic/syntastic'
 
-" lsp
-Plug 'yegappan/lsp'
+" 语法检查 
 Plug 'dense-analysis/ale'
+
+" 语言服务器(lsp)
+Plug 'yegappan/lsp'
 
 " 拼写检查
 Plug 'kamykn/spelunker.vim'
@@ -226,10 +227,10 @@ let lspOpts = {
 autocmd User LspSetup call LspOptionsSet(lspOpts)
 
 let lspServers = [
-	 \ #{name: 'ruff',
+	 \ #{name: 'pyright',
 	 \   filetype: 'python',
-	 \   path: '/home/lyncir/.local/bin/ruff',
-	 \   args: ['server'],
+	 \   path: '/home/lyncir/.local/share/nvim/lsp_servers/pyright/node_modules/.bin/pyright-langserver',
+	 \   args: ['--stdio'],
 	 \   workspaceConfig: #{
 	 \     python: #{
 	 \       pythonPath: '~/Repos/env_2.7/bin/python2.7'
@@ -243,15 +244,24 @@ highlight LspDiagVirtualText ctermfg=Red
 highlight link LspDiagLine NONE
 
 
-" 另一个补全,用于gdscript
+" ALE 另一个补全,用于gdscript
+" 禁用语言服务器
+let g:ale_disable_lsp = 1
+" 设置语法检查
 let g:ale_linters = {
 \   'gdscript': ['godot'],
+\   'python': ['ruff'],
 \}
 let g:ale_linters_explicit = 1
+" 高亮
+let g:ale_change_sign_column_color = 1
+" 打开窗口
+let g:ale_open_list = 1
+
 " Enable ALE auto completion globally
-let g:ale_completion_enabled = 1
+"let g:ale_completion_enabled = 1
 " Allow ALE to autoimport completion entries from LSP servers
-let g:ale_completion_autoimport = 1
+"let g:ale_completion_autoimport = 1
 " Register LSP server for Godot:
 call ale#linter#Define('gdscript', {
 \   'name': 'godot',
@@ -331,28 +341,6 @@ augroup END
 " Override highlight setting.
 highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
 highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
-
-
-""""""""""""
-" 语法校验
-"""""""""""
-" syntastic
-" https://github.com/vim-syntastic/syntastic.git
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_python_checkers = ['flake8']
-" disable python flake8 line to long error check
-let g:syntastic_python_flake8_args = "--ignore=E501,E402,W503"
-" disable style checking
-"let g:syntastic_quiet_messages = {"type": "style"}
-map <leader>8 :SyntasticToggleMode<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
