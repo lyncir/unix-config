@@ -71,7 +71,7 @@ AddToFunc	StartFunction
 #+ I Exec exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
 # 开启数字锁
 + I Exec exec numlockx on
-# 设置自动关闭屏幕时间 1800s
+# 设置自动关闭屏幕时间 1800s,需关闭dpms: xset -dpms
 #+ I Exec exec xset dpms 1800 1800 1800
 + I Exec exec xset s 1800
 

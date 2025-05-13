@@ -92,6 +92,8 @@ Plug 'kamykn/spelunker.vim'
 
 " Godot
 Plug 'habamax/vim-godot'
+" Rust
+Plug 'rust-lang/rust.vim'
 
 " DEBUG
 Plug 'puremourning/vimspector'
@@ -248,9 +250,12 @@ highlight link LspDiagLine NONE
 " 禁用语言服务器
 let g:ale_disable_lsp = 1
 " 设置语法检查
+" rustup component add rust-analyzer
+" pip install ruff
 let g:ale_linters = {
 \   'gdscript': ['godot'],
 \   'python': ['ruff'],
+\   'rust': ['cargo', 'analyzer'],
 \}
 let g:ale_linters_explicit = 1
 " 高亮
