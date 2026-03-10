@@ -87,8 +87,7 @@ Plug 'dense-analysis/ale'
 " 语言服务器(lsp)
 Plug 'yegappan/lsp'
 
-" 拼写检查
-Plug 'kamykn/spelunker.vim'
+" 拼写检查 typos-lsp
 
 " Godot
 Plug 'habamax/vim-godot'
@@ -237,6 +236,16 @@ let lspServers = [
 	 \     python: #{
 	 \       pythonPath: '~/Repos/env_2.7/bin/python2.7'
 	 \   }}},
+	 \ #{name: 'typos',
+	 \   filetype: 'python',
+	 \   path: 'typos-lsp',
+	 \   args: [],
+	 \   syncInit: v:false,
+	 \   initializationOptions: #{
+	 \        config: '~/.config/typos.toml',
+     \        diagnosticSeverity: 'Warning'
+     \    }
+	 \  }
 	 \ ]
 
 autocmd User LspSetup call LspAddServer(lspServers)
@@ -311,42 +320,8 @@ let g:vimspector_enable_mappings='HUMAN'
 """"""""""""
 " 拼写检查
 """"""""""""
-" spelunker
-" https://github.com/kamykn/spelunker.vim
-" 把所有错误拼写的单词加入到spellfile中
-" :SpelunkerAddAll
-" 添加所选单词加入到spellfile中
-" usage: Zg
-" 建议拼写
-" usage: Zl
-" 跳转到错误拼写的单词
-" usage: ZN
-
-" 关闭vim自带拼写检查
-set nospell
-
-" 启用拼写检查
-let g:enable_spelunker_vim = 1
-let g:spelunker_highlight_type = 2
-let g:spelunker_disable_uri_checking = 1
-let g:spelunker_disable_email_checking = 1
-let g:spelunker_disable_acronym_checking = 1
-let g:spelunker_disable_backquoted_checking = 1
-let g:spelunker_disable_auto_group = 1
-
-augroup spelunker
-  autocmd!
-  " Setting for g:spelunker_check_type = 1:
-  autocmd BufWinEnter,BufWritePost *.py call spelunker#check()
-
-  " Setting for g:spelunker_check_type = 2:
-  autocmd CursorHold *.py call spelunker#check_displayed_words()
-augroup END
-
-" Override highlight setting.
-highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
-highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
-
+" typos-lsp
+" https://github.com/tekumara/typos-lsp
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 快捷键
