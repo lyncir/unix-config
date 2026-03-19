@@ -85,6 +85,8 @@ Plug 'dense-analysis/ale'
 
 " 拼写检查 typos-lsp
 
+Plug 'Vimjas/vim-python-pep8-indent'
+
 " Godot
 Plug 'habamax/vim-godot'
 " Rust
@@ -217,9 +219,18 @@ let g:ale_python_executable = '/home/lyncir/Repos/env_2.7/bin/python2.7'
 " 2. 针对特定工具指定路径（如果这些工具装在 2.7 的 pip 里）
 let g:ale_python_flake8_executable = '/home/lyncir/Repos/env_2.7/bin/flake8'
 let g:ale_python_pyright_executable =  '/home/lyncir/.local/share/nvim/lsp_servers/pyright/node_modules/.bin/pyright-langserver'
+" 1. 手动定义 typos-lsp (如果 ALE 默认没集成)
+call ale#linter#Define('python', {
+\   'name': 'typos_lsp',
+\   'lsp': 'stdio',
+\   'executable': 'typos-lsp',
+\   'command': '%e',
+\   'project_root': function('ale#python#FindProjectRoot'),
+\})
+
 " 3. 配置 Linter（语法检查器）
 let g:ale_linters = {
-\   'python': ['flake8', 'pyright'],
+\   'python': ['flake8', 'pyright', 'typos_lsp'],
 \}
 
 " 例如让 flake8 忽略一些 Py3 独有的规则
@@ -266,9 +277,17 @@ highlight ALEVirtualTextInfo guifg=#00FFFF ctermfg=Cyan
 
 """""""""
 " 开启 ALE 自动补全(手动)
-let g:ale_completion_enabled = 0
+let g:ale_completion_enabled = 1
+let g:ale_completion_delay = 999999
 " 在 Python 文件中自动设置 omnifunc 为 ALE 的函数
 autocmd FileType python setlocal omnifunc=ale#completion#OmniFunc
+"
+" 补全时不搜索包含文件 (Scan included files)
+set complete-=i
+" 补全时不搜索定义 (Scan defined identifiers)
+set complete-=d
+" 按 Ctrl-p 只走 ALE
+autocmd FileType python inoremap <buffer> <C-p> <C-x><C-o>
 
 """""""
 " 快捷键
