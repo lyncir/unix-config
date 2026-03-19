@@ -77,15 +77,11 @@ Plug 'Yggdroot/indentLine'
 " 对齐
 Plug 'junegunn/vim-easy-align'
 
-" 语言相关
-" python
-Plug 'Vimjas/vim-python-pep8-indent'
-
 " 语法检查 
 Plug 'dense-analysis/ale'
 
 " 语言服务器(lsp)
-Plug 'yegappan/lsp'
+"Plug 'yegappan/lsp'
 
 " 拼写检查 typos-lsp
 
@@ -216,87 +212,98 @@ nmap ga <Plug>(EasyAlign)
 """"""""""""""
 " 自动补全
 """""""""""""
-" Pthon	
-let lspOpts = {
-	 \  'autoHighlightDiags': v:true,
-	 \  'diagVirtualTextAlign': 'below',
-	 \  'showDiagWithVirtualText': v:true,
-	 \  'snippetSupport': v:true,
-	\   'ultisnipsSupport': v:true,
-	 \ }
-
-autocmd User LspSetup call LspOptionsSet(lspOpts)
-
-let lspServers = [
-	 \ #{name: 'pyright',
-	 \   filetype: 'python',
-	 \   path: '/home/lyncir/.local/share/nvim/lsp_servers/pyright/node_modules/.bin/pyright-langserver',
-	 \   args: ['--stdio'],
-	 \   workspaceConfig: #{
-	 \     python: #{
-	 \       pythonPath: '~/Repos/env_2.7/bin/python2.7'
-	 \   }}},
-	 \ #{name: 'typos',
-	 \   filetype: 'python',
-	 \   path: 'typos-lsp',
-	 \   args: [],
-	 \   syncInit: v:false,
-	 \   initializationOptions: #{
-	 \        config: '~/.config/typos.toml',
-     \        diagnosticSeverity: 'Warning'
-     \    }
-	 \  }
-	 \ ]
-
-autocmd User LspSetup call LspAddServer(lspServers)
-
-" 设置提示高亮颜色
-highlight LspDiagVirtualText ctermfg=Red
-highlight link LspDiagLine NONE
-
-
-" ALE 另一个补全,用于gdscript
-" 禁用语言服务器
-let g:ale_disable_lsp = 1
-" 设置语法检查
-" rustup component add rust-analyzer
-" pip install ruff
+" 1. 全局指定 Python 解释器路径（指向你的 2.7 可执行文件）
+let g:ale_python_executable = '/home/lyncir/Repos/env_2.7/bin/python2.7'
+" 2. 针对特定工具指定路径（如果这些工具装在 2.7 的 pip 里）
+let g:ale_python_flake8_executable = '/home/lyncir/Repos/env_2.7/bin/flake8'
+let g:ale_python_pyright_executable =  '/home/lyncir/.local/share/nvim/lsp_servers/pyright/node_modules/.bin/pyright-langserver'
+" 3. 配置 Linter（语法检查器）
 let g:ale_linters = {
-\   'gdscript': ['godot'],
-\   'python': ['ruff'],
-\   'rust': ['cargo', 'analyzer'],
+\   'python': ['flake8', 'pyright'],
 \}
-let g:ale_linters_explicit = 1
-" 高亮
-let g:ale_change_sign_column_color = 1
-" 打开窗口
-let g:ale_open_list = 1
+
+" 例如让 flake8 忽略一些 Py3 独有的规则
+let g:ale_python_flake8_options = '--ignore=E121,E123,E126,E226,E241,E242,E704,W503,E501'
+" 显示提示的linter名字
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+""""""""
+" 何时检查补全
+""""""""""
+" 禁用边打字边检查
+let g:ale_lint_on_text_changed = 'never'
+" 离开插入模式时检查（可选）
+let g:ale_lint_on_insert_leave = 0
+" 保存文件时检查（最推荐）
+let g:ale_lint_on_save = 1
+
+""""""""
+" LSP
+"""""""
+" 允许 ALE 优先使用已运行的 LSP 实例
+let g:ale_disable_lsp = 0
+
+"""""""
+" UI
+"""""""
+" 不打开窗口
+let g:ale_open_list = 0
+" 在侧边栏显示错误/警告图标
+let g:ale_set_signs = 1
+" 在代码中对错误文本进行高亮（加粗或下划线）
+let g:ale_set_highlights = 1
+" Pyright 使用错误图标
+let g:ale_sign_error = '✘'
+" Flake8 使用风格图标（通过 type_map 确保它显示为 Warning）
+let g:ale_sign_warning = '≈'
+" 设置虚拟文本颜色
+" --- 1. 设置错误消息为红色 (针对 Pyright/Error) ---
+highlight ALEVirtualTextError guifg=#FF0000 ctermfg=Red
+" --- 2. 设置警告消息为黄色 (针对 Flake8/Warning) ---
+highlight ALEVirtualTextWarning guifg=#FFA500 ctermfg=Yellow
+" --- 3. 设置信息/提示消息为蓝色 (可选) ---
+highlight ALEVirtualTextInfo guifg=#00FFFF ctermfg=Cyan
+
+"""""""""
+" 开启 ALE 自动补全(手动)
+let g:ale_completion_enabled = 0
+" 在 Python 文件中自动设置 omnifunc 为 ALE 的函数
+autocmd FileType python setlocal omnifunc=ale#completion#OmniFunc
+
+"""""""
+" 快捷键
+"""""""
+" 用 <leader>l 打开错误列表
+nnoremap <leader>l :lopen<CR>
+" 用 <leader>lc 关闭错误列表
+nnoremap <leader>lc :lclose<CR>
+
 
 " Enable ALE auto completion globally
 "let g:ale_completion_enabled = 1
 " Allow ALE to autoimport completion entries from LSP servers
 "let g:ale_completion_autoimport = 1
 " Register LSP server for Godot:
-call ale#linter#Define('gdscript', {
-\   'name': 'godot',
-\   'lsp': 'socket',
-\   'address': '127.0.0.1:6005',
-\   'project_root': 'project.godot',
-\})
+"call ale#linter#Define('gdscript', {
+"\   'name': 'godot',
+"\   'lsp': 'socket',
+"\   'address': '127.0.0.1:6005',
+"\   'project_root': 'project.godot',
+"\})
 
 
 " Godot
-func! GodotSettings() abort
-    setlocal foldmethod=expr
-    setlocal tabstop=4
-    nnoremap <buffer> <F4> :GodotRunLast<CR>
-    nnoremap <buffer> <F5> :GodotRun<CR>
-    nnoremap <buffer> <F6> :GodotRunCurrent<CR>
-    nnoremap <buffer> <F7> :GodotRunFZF<CR>
-endfunc
-augroup godot | au!
-    au FileType gdscript call GodotSettings()
-augroup end
+"func! GodotSettings() abort
+"    setlocal foldmethod=expr
+"    setlocal tabstop=4
+"    nnoremap <buffer> <F4> :GodotRunLast<CR>
+"    nnoremap <buffer> <F5> :GodotRun<CR>
+"    nnoremap <buffer> <F6> :GodotRunCurrent<CR>
+"    nnoremap <buffer> <F7> :GodotRunFZF<CR>
+"endfunc
+"augroup godot | au!
+"    au FileType gdscript call GodotSettings()
+"augroup end
 
 
 """"""""""""""""""""""""
