@@ -275,6 +275,7 @@ highlight ALEVirtualTextWarning guifg=#FFA500 ctermfg=Yellow
 " --- 3. 设置信息/提示消息为蓝色 (可选) ---
 highlight ALEVirtualTextInfo guifg=#00FFFF ctermfg=Cyan
 
+
 """""""""
 " 开启 ALE 自动补全(手动)
 let g:ale_completion_enabled = 1
@@ -293,7 +294,7 @@ autocmd FileType python inoremap <buffer> <C-p> <C-x><C-o>
 " 快捷键
 """""""
 " 用 <leader>l 打开错误列表
-nnoremap <leader>l :lopen<CR>
+nnoremap <leader>l :lopen 20<CR>
 " 用 <leader>lc 关闭错误列表
 nnoremap <leader>lc :lclose<CR>
 
