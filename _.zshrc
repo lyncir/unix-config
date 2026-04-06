@@ -128,3 +128,8 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 # Created by `userpath` on 2020-06-13 03:23:35
 export PATH="$PATH:/home/lyncir/.local/bin"
+
+# 目录颜色
+LS_COLORS=$LS_COLORS:'di=0;36'
+export LS_COLORS
+
