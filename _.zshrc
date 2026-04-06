@@ -1,7 +1,7 @@
 #!/bin/zsh
 #历史纪录
 TERM=xterm
-export HISTSIZE=100000
+export HISTSIZE=1000000
 export HISTFILE="$HOME/.zhistory"
 export SAVEHIST=$HISTSIZE
 # append history record
@@ -133,3 +133,5 @@ export PATH="$PATH:/home/lyncir/.local/bin"
 LS_COLORS=$LS_COLORS:'di=0;36'
 export LS_COLORS
 
+alias ff="find . -type f -print0 | xargs -0 du -h | sort -rh | head -n 20"
+alias pt="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head -20"
