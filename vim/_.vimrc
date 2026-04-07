@@ -231,7 +231,17 @@ call ale#linter#Define('python', {
 " 3. 配置 Linter（语法检查器）
 let g:ale_linters = {
 \   'python': ['flake8', 'pyright', 'typos_lsp'],
+\   'rust': ['analyzer', 'cargo'],
 \}
+
+" 指定 Rust 使用的 Fixer (保存时自动格式化)
+let g:ale_fixers = {
+\   'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'],
+\}
+" 启用保存时自动运行 Fixer
+let g:ale_fix_on_save = 1
+" 如果你想使用 Clippy 进行更严格的检查
+let g:ale_rust_cargo_use_clippy = 1
 
 " 例如让 flake8 忽略一些 Py3 独有的规则
 let g:ale_python_flake8_options = '--ignore=E121,E123,E126,E226,E241,E242,E704,W503,E501'

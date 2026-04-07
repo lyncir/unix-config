@@ -73,6 +73,7 @@ AddToFunc	StartFunction
 + I Exec exec numlockx on
 # 设置自动关闭屏幕时间 1800s,需关闭dpms: xset -dpms
 #+ I Exec exec xset dpms 1800 1800 1800
++ I Exec exec xset -dpms
 + I Exec exec xset s 1800
 
 
@@ -204,6 +205,11 @@ Style "*" HandleWidth 2, MWMBorder, FirmBorder, MWMButtons, !Handles
 
 # 禁用图标,无法在桌面上出现
 Style "*" !Icon
+
+# firefox兼容
+#Style "firefox-esr" FPGrabFocus, FPReleaseFocus
+#Style "firefox-esr" !VariablePPosition, !VariableUSPosition, EWMHDonateIcon, EWMHDonateName
+
 
 # 特殊窗口风格
 # 可以使用xwininfo(x11-utils)查看窗口名字

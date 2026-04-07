@@ -12,5 +12,8 @@ export GLFW_IM_MODULE=ibus
 eval "$(dbus-launch --sh-syntax --exit-with-session)"
 
 fcitx &
+# 延迟2秒
+(sleep 5 && redshift -t 5800:4600 -l 24.46:118.1 -g 0.9:1:1) &
 
 exec fvwm3
+
