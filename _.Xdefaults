@@ -1,5 +1,6 @@
 ! Xft settings ----------------------------
-Xft.dpi:96
+! TODO: change dpi 96 -> 168
+Xft.dpi:168
 Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
