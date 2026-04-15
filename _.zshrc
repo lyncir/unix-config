@@ -126,6 +126,11 @@ export GOPATH=$HOME/go
 
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
+# ANDROID
+export ANDROID_HOME=/opt/android-sdk
+export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+
 # Created by `userpath` on 2020-06-13 03:23:35
 export PATH="$PATH:/home/lyncir/.local/bin"
 
