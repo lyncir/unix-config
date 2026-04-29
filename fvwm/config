@@ -23,8 +23,8 @@
 InfoStoreAdd terminal urxvt
 
 # 设置环境变量
-InfoStoreAdd panel_height 24
-InfoStoreAdd fvwm_icon_size 20x20
+InfoStoreAdd panel_height 36
+InfoStoreAdd fvwm_icon_size 32x32
 
 # Icon指定图标时自动搜索的路径
 ImagePath $[FVWM_USERDIR]/icons:$[FVWM_USERDIR]/images:+
@@ -68,11 +68,12 @@ AddToFunc	StartFunction
 
 # 启动程序
 # 切换按键 Caps<=>Ctrl Alt<=>Win
-#+ I Exec exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
++ I Exec exec setxkbmap -option "ctrl:swapcaps,altwin:swap_alt_win"
 # 开启数字锁
 + I Exec exec numlockx on
-# 设置自动关闭屏幕时间 1800s,需关闭dpms: xset -dpms
+# 设置自动关闭屏幕时间 1800s
 #+ I Exec exec xset dpms 1800 1800 1800
++ I Exec exec xset -dpms
 + I Exec exec xset s 1800
 
 
@@ -279,7 +280,7 @@ key f 		W CM	FullScreen
 #   6 - Minimize
 ###########
 # 标题风格 靠左,高,扁平
-TitleStyle LeftJustified Height 14 -- Flat
+TitleStyle LeftJustified Height 20 -- Flat
 
 # 按钮1,关闭
 ButtonStyle 	1 	Active	 				Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
@@ -320,7 +321,7 @@ DestroyModuleConfig MainPanel:*
 
 # 左侧
 # 时间脚本内有宽高设定 123
-*MainPanel: (123x1, Swallow DateTime 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/DateTime', Frame 0)
+*MainPanel: (300x1, Swallow DateTime 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/DateTime', Frame 0)
 # 空白 10
 *MainPanel: (10x1, Frame 0)
 # 快捷按钮 24
@@ -330,14 +331,14 @@ DestroyModuleConfig MainPanel:*
 *MainPanel: ($[infostore.panel_height]x1, Icon keepassx.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec keepassxc &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon dbeaver.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec dbeaver &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon dingtalk.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec /opt/apps/com.alibabainc.dingtalk/files/Elevator.sh &', Frame 0)
-*MainPanel: ($[infostore.panel_height]x1, Icon xmind.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec /opt/xmind/xmind.sh &', Frame 0)
+*MainPanel: ($[infostore.panel_height]x1, Icon xmind.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec cd /opt/xmind8/XMind_amd64; ./XMind &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon ardm.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec /opt/ardm.bin --no-sandbox &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon vivaldi.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec vivaldi &', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon stretchly.svg:$[infostore.fvwm_icon_size], Action(Mouse 1) 'Exec stretchly &', Frame 0)
 
 # 中间
-*MainPanel: (600x1, Frame 0)
-*MainPanel: (123x1, Swallow LoadMeter 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/LoadMeter', Frame 0)
+*MainPanel: (800x1, Frame 0)
+*MainPanel: (150x1, Swallow LoadMeter 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/LoadMeter', Frame 0)
 
 # 音乐 
 # ---------------------------------------------------------
@@ -348,12 +349,11 @@ DestroyModuleConfig MainPanel:*
 *MainPanel: ($[infostore.panel_height]x1, Icon player_stop.png Action(Mouse 1) 'Exec exec echo -e "stop\\nclose"|nc 127.0.0.1 6600', Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon player_play.png Action(Mouse 1) `Exec exec mpc status|grep -q '\[playing\]\|\[paused\]' && mpc -h 127.0.0.1 -p 6600 toggle || mpc -h 127.0.0.1 -p 6600 play`, Frame 0)
 *MainPanel: ($[infostore.panel_height]x1, Icon player_fwd.png Action(Mouse 1) 'Exec exec echo -e "next\\nclose"|nc 127.0.0.1 6600', Frame 0)
-*MainPanel: (400x1, Swallow MpdSongInfo 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/MpdSongInfo', Frame 0)
-
+*MainPanel: (500x1, Swallow MpdSongInfo 'Module FvwmScript $[FVWM_USERDIR]/fvwmscripts/MpdSongInfo', Frame 0)
 
 # 右侧 图标尺寸为24,最多放10个图标,那么就是24x10=240宽
-*MainPanel: (400x1, Frame 0)
-Test (x stalonetray) *MainPanel: (240x1, Swallow(NoClose,UseOld) stalonetray 'Exec exec stalonetray --config "$[FVWM_USERDIR]/stalonetrayrc"', Frame 0)
+*MainPanel: (900x1, Frame 0)
+Test (x stalonetray) *MainPanel: (360x1, Swallow(NoClose,UseOld) stalonetray 'Exec exec stalonetray --config "$[FVWM_USERDIR]/stalonetrayrc"', Frame 0)
 
 
 #######

@@ -11,6 +11,8 @@ export GLFW_IM_MODULE=ibus
 
 eval "$(dbus-launch --sh-syntax --exit-with-session)"
 
-fcitx &
+fcitx -d -r -s 5 &
+
+sleep 10 && redshift -m randr -t 5800:4600 -l 24.46:118.1 -g 0.9:1:1 -P > /tmp/redshift.log 2>&1 &
 
 exec fvwm3

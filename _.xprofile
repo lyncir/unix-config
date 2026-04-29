@@ -1,6 +1,10 @@
+# 3D加速
 picom -b
-#redshift -t 5800:4600 -l 24.46:118.1 -g 0.9:1:1 &
+# 截图工具
 flameshot &
+# 代理工具
+wmsxwda &
 
+# 安卓相关
 export JAVA_HOME=/opt/jdk
 export PATH=$JAVA_HOME/bin:$PATH

@@ -1,5 +1,5 @@
 WindowTitle {DateTime}
-WindowSize  123 24
+WindowSize  300 36
 Font "xft:Sans:style=Bold:size=9" 
 
 Init
@@ -22,7 +22,7 @@ PeriodicTasks
 Widget 1
 Property
  Position 0 0
- Size 123 24
+ Size 300 36
  Font "xft:Sans:style=Bold:size=8"
  Type ItemDraw
  Flags NoReliefString
