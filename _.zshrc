@@ -135,8 +135,9 @@ export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-
 export PATH="$PATH:/home/lyncir/.local/bin"
 
 # 目录颜色
-LS_COLORS=$LS_COLORS:'di=0;36'
-export LS_COLORS
+#LS_COLORS=$LS_COLORS:'di=0;36'
+#export LS_COLORS
 
 alias ff="find . -type f -print0 | xargs -0 du -h | sort -rh | head -n 20"
 alias pt="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head -20"
+alias fd="du . --max-depth 2 -h | sort -hr | head -n 20"
